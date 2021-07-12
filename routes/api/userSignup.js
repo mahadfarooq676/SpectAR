@@ -33,7 +33,7 @@ router.post('/',[
     let user = await User.findOne({ email });
 
     if(user){
-        return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+        return res.status(400).json([{ msg: 'User already exists' }] );
     }else{
 
        user = new User({
@@ -53,7 +53,7 @@ router.post('/',[
         user.password = await bcrypt.hash(password, salt);
 
         await user.save();
-        res.status(200).send('User created successfully');
+        return res.status(200).json([{ msg: 'User created successfully' }] );
     }
     }catch(err){
         console.log(err.message);

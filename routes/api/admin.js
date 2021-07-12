@@ -12,7 +12,7 @@ const Admin = require('../../models/model_admin');
 router.post('/',[
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please enter valid email').isEmail(),
-    check('password', 'Please enter 6 or more characters').isLength({ min:6 })
+    check('password', 'Password should be6 or more characters').isLength({ min:6 })
 ],async (req,res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){

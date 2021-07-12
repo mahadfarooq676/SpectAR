@@ -6,21 +6,14 @@ import PropTypes from 'prop-types';
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const ManageProduct = ({ admin }) => {
-    // const adminsData =  admin(adm => (
-    //   <td key={adm._id}>
-    //     <td>{adm.name}</td>
-    //     <td>{adm.email}</td>
-    //     <td>{adm.addedBy}</td>
-    //     <td>{adm.addedDate}</td>
-    //     <td><button className="btn btn-danger btn-gradient"></button></td>
-    //   </td>
-    // ))
+const ManageAdmins = ({
+    admins : {
+    }
 
   
-    return (
+  }) => {  return (
       <div className="row">
-        <div className="col-3"><Link to="/AppRoutes/addAdmin" className="btn btn-gradient-primary mr-2">Add Admin</Link></div>
+        <div className="col-3 mb-3"><Link to="/AppRoutes/addAdmin" className="btn btn-gradient-primary mr-2">Add Admin</Link></div>
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">
@@ -36,7 +29,9 @@ const ManageProduct = ({ admin }) => {
                         <th> Status </th>
                       </tr>
                     </thead>
-                    {/* <tbody>{adminsData}</tbody> */}
+                    <tbody>
+                      <td>Name:</td>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -45,11 +40,12 @@ const ManageProduct = ({ admin }) => {
         </div>
 
     );
+  }
+  
+
+
+ManageAdmins.propTypes = {
   
 }
 
-ManageProduct.propTypes = {
-  admin: PropTypes.array.isRequired
-}
-
-export default ManageProduct;
+export default ManageAdmins;

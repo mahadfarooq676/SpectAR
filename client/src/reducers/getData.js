@@ -16,7 +16,8 @@ export default function(state = initialState, action) {
         case GET_ADMIN_DATA:
             return{
                 ...state,
-                admins: payload
+                admins: payload,
+                loading: false
             };
 
         default:

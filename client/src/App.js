@@ -4,7 +4,6 @@ import './App.scss';
 import { Switch, Route, Redirect } from "react-router-dom";
 import Alert from './components/layout/Alert';
 import Login from "./components/auth/login";
-import Register from "./components/auth/register";
 import NotFound from "./components/notFound";
 import AppRoutes from './AppRoutes';
 import { loadUser } from './actions/auth';
@@ -25,10 +24,8 @@ const App = () => {
 
   return (
                 <Provider store={store}>
-                  <Alert/>
                   <Switch>
                     <Route path='/Login' exact component={Login} />
-                    <Route path='/Register'  component={Register} />
                     <Route path='/AppRoutes' component={AppRoutes} />
                     <Route path='/notFound' component={NotFound} />
                     <Redirect exact from="/" to="/Login" />
@@ -37,6 +34,5 @@ const App = () => {
                 </Provider>
                
  )}; 
-
 
 export default App;
