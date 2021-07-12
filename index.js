@@ -5,9 +5,9 @@ const User = require('./models/model_user');
 const path = require("path");
 const mongoose = require('mongoose');
 const { MongoError } = require('mongodb');
-if(mongoose.connect("mongodb+srv://Mahad:a1b2c3d4e5@spectar.pkicm.mongodb.net/SpectAR?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true})){
-    console.log('MongoDB Connected');
-}
+const connectDB = require('./config/db');
+
+connectDB();
 
 const app = express();
 
