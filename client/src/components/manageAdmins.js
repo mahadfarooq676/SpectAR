@@ -45,7 +45,7 @@ const ManageAdmins = ({
 
 
 ManageAdmins.propTypes = {
-  
+  admins: PropTypes.object.isRequired
 }
 
 export default ManageAdmins;
