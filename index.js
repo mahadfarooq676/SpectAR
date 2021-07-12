@@ -5,7 +5,7 @@ const User = require('./models/model_user');
 const path = require("path");
 const mongoose = require('mongoose');
 const { MongoError } = require('mongodb');
-if(mongoose.connect("mongodb://127.0.0.1:27017/SpectAR",{ useNewUrlParser: true, useUnifiedTopology: true})){
+if(mongoose.connect("mongodb+srv://Mahad:a1b2c3d4e5@spectar.pkicm.mongodb.net/SpectAR?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true})){
     console.log('MongoDB Connected');
 }
 

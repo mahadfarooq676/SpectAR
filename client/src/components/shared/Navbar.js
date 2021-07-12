@@ -10,8 +10,8 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
     return (
       <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <Link className="navbar-brand brand-logo" to="/AppRoutes/dashboard"><img src={require('../../assets/images/logo2.png').default} alt="logo" /></Link>
-          <Link className="navbar-brand brand-logo-mini" to="/AppRoutes/dashboard"><img src={require('../../assets/images/logo-mini.png').default} alt="logo" /></Link>
+          <Link className="navbar-brand brand-logo" to="/AppRoutes/dashboard"><img src={require('../../assets/images/SpectARLogo.png').default} style={{ width:"170px", height:"auto" }} alt="logo" /></Link>
+          <Link className="navbar-brand brand-logo-mini" to="/AppRoutes/dashboard"><img src={require('../../assets/images/SpectARLogoSm.png').default} alt="logo" /></Link>
         </div>
         <div className="navbar-menu-wrapper d-flex align-items-stretch">
           <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick={ () => document.body.classList.toggle('sidebar-icon-only') }>
