@@ -1,86 +1,89 @@
-import React, { Component } from 'react';
- 
-import "react-datepicker/dist/react-datepicker.css";
-import { Link } from 'react-router-dom';
+import React, { Fragment, useEffect} from 'react';
+import PropTypes from 'prop-types';
+import { Link  } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { getAllProducts } from '../actions/getData';
+import Spinner from './layout/spinner';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
-export class AddProduct extends Component {
-    
+const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
+    useEffect(() => {
+        getAllProducts();
+    }, []);
 
-  render () {
-    return (
-      <div className="row">
-      <div className="col-12 grid-margin">
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">Manage Products</h4>
-            <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th> Product ID </th>
-                    <th> Product Name </th>
-                    <th> Product Price </th>
-                    <th> Product Quantity </th>
-                    <th> Product Image </th>
-                    <th> Date </th>
-                    <th> Action </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td> P-0001 </td>
-                    <td> Glasses-0034 </td>
-                    <td> PKR 1299 </td>
-                    <td> 200 </td>
-                    <td>
-                      <img src={require("../assets/images/product_images_2/product1.jpg").default} alt=""/></td>
-                    <td> May 12, 2021 </td>
-                    <td><Link to="/AppRoutes/updateProduct" className="btn btn-gradient-primary mr-2">Update</Link>
-                    <Link to="/AppRoutes/manageProduct" className="btn btn-gradient-danger mr-2">Delete</Link></td>
-                  </tr>
-                  <tr>
-                    <td> P-0002 </td>
-                    <td> Glasses-0024 </td>
-                    <td> PKR 1499 </td>
-                    <td> 150 </td>
-                    <td>
-                      <img src={require("../assets/images/product_images_2/product2.jpg").default} className="mr-2" alt="face" /></td>
-                    <td> Apr 22, 2021 </td>
-                    <td><Link to="/AppRoutes/updateProduct" className="btn btn-gradient-primary mr-2">Update</Link>
-                    <Link to="/AppRoutes/manageProduct" className="btn btn-gradient-danger mr-2">Delete</Link></td>
-                  </tr>
-                  <tr>
-                    <td> P-0003 </td>
-                    <td> Glasses-0987 </td>
-                    <td> PKR 999 </td>
-                    <td> 300 </td>
-                    <td>
-                      <img src={require("../assets/images/product_images_2/product5.jpg").default} className="mr-2" alt="face" /></td>
-                    <td> Apr 15, 2021 </td>
-                    <td><Link to="/AppRoutes/updateProduct" className="btn btn-gradient-primary mr-2">Update</Link>
-                    <Link to="/AppRoutes/manageProduct" className="btn btn-gradient-danger mr-2">Delete</Link></td>
-                  </tr>
-                  <tr>
-                    <td> P-0004 </td>
-                    <td> Glasses-0675 </td>
-                    <td> PKR 1599 </td>
-                    <td> 240 </td>
-                    <td>
-                      <img src={require("../assets/images/product_images_2/product6.jpg").default} className="mr-2" alt="face" /></td>
-                    <td> Mar 5, 2021 </td>
-                    <td><Link to="/AppRoutes/updateProduct" className="btn btn-gradient-primary mr-2">Update</Link>
-                    <Link to="/AppRoutes/manageProduct" className="btn btn-gradient-danger mr-2">Delete</Link></td>
-                  </tr>
-                </tbody>
-              </table>
+    const deleteProduct = async (_id) => {
+      confirmAlert({
+        title: 'Confirm to submit',
+        message: 'Are you sure to do this.',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => products.filter(product => (product._id != _id))
+          },
+          {
+            label: 'No',
+            onClick: () => alert()
+          }
+        ]
+      });
+    }
+
+    return loading && products === null ? <Spinner /> : <Fragment>
+        <div className="row">
+        <div className="col-3 mb-3"><Link to="/AppRoutes/addProduct" className="btn btn-gradient-primary"><i className="mdi mdi-plus menu-icon"></i>Add Product</Link></div>
+          <div className="col-12 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">Products</h4>
+                <div className="table-responsive">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th> Product Name </th>
+                        <th> Product Price</th>
+                        <th> Category </th>
+                        <th> Type </th>
+                        <th> Quantity </th>
+                        <th> Action </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                        {products.length > 0 ? (
+                            products.map(product => (
+                              <tr>
+                              <td>{product.productName}</td>
+                              <td>{product.productPrice}</td>
+                              <td>{product.productCategory}</td>
+                              <td>{product.productType}</td>
+                              <td>{product.productQuantity}</td>
+                              <td><Link className="btn btn-sm btn-gradient-success mr-2" to={`/appRoutes/viewProduct/${product._id}`} ><i className="mdi mdi-eye"></i></Link>
+                              <Link className="btn btn-sm btn-gradient-info mr-2" to="/appRoutes/updateProduct"><i className="mdi mdi-rotate-left"></i></Link>
+                              <Link className="btn btn-sm btn-gradient-danger mr-2" onClick={() => deleteProduct(product._id)} ><i className="mdi mdi-delete"></i></Link></td>
+                            </tr>
+                            ))
+                        ) : <Spinner/>}
+                    
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    );
-  }
-}
+        
+    </Fragment>
+};
 
-export default AddProduct;
+ManageProducts.propTypes = {
+    getAllProducts: PropTypes.func.isRequired,
+    getData: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    getData: state.getData
+})
+
+export default connect( mapStateToProps, {getAllProducts})(ManageProducts);

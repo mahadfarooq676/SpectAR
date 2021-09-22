@@ -61,7 +61,7 @@ var deleteStatus = 0;
                     <Form.Control type="password" name="confirmPassword" className="form-control" onChange={e => onChange(e)} placeholder="Enter Confirm Password" />
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
-                  <input type="button" className="btn btn-light" name="cancel" value="cancel" />
+                  <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
             </div>

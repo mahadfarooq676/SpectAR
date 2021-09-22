@@ -39,6 +39,7 @@ router.post('/',[
     const isMatch = await bcrypt.compare(password, admin.password);
     if(!isMatch){
         return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
+        
     }
         const payload = {
             admin: {

@@ -45,12 +45,6 @@ class Sidebar extends Component {
               <i className="mdi mdi-home menu-icon"></i>
             </Link>
           </li>
-          <li className={ this.isPathActive('/AppRoutes/addProduct') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/AppRoutes/addProduct">
-              <span className="menu-title"><Trans>Add Product</Trans></span>
-              <i className="mdi mdi-table-large menu-icon"></i>
-            </Link>
-          </li>
           <li className={ this.isPathActive('/AppRoutes/manageProduct') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/AppRoutes/manageProduct">
               <span className="menu-title"><Trans>Manage Product</Trans></span>

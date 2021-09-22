@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
- 
-import "react-datepicker/dist/react-datepicker.css";
+import { Link  } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { getAllAdmins } from '../actions/getData';
+import Spinner from './layout/spinner';
 
 
-const ManageAdmins = ({
-    admins : {
-    }
+const ManageAdmins = ({ getAllAdmins, getData: { admins, loading } }) => {
+    useEffect(() => {
+        getAllAdmins();
+    }, []);
 
-  
-  }) => {  return (
-      <div className="row">
-        <div className="col-3 mb-3"><Link to="/AppRoutes/addAdmin" className="btn btn-gradient-primary mr-2">Add Admin</Link></div>
+    return loading && admins === null ? <Spinner /> : <Fragment>
+        <div className="row">
+        <div className="col-3 mb-3"><Link to="/AppRoutes/addAdmin" className="btn btn-gradient-primary mr-2"><i className="mdi mdi-plus menu-icon"></i>Add Admin</Link></div>
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">
@@ -22,15 +22,26 @@ const ManageAdmins = ({
                   <table className="table">
                     <thead>
                       <tr>
-                        <th> Admin ID </th>
                         <th> Admin Name </th>
                         <th> Admin Email</th>
-                        <th>  </th>
-                        <th> Status </th>
+                        <th> Added Date </th>
+                        <th> Action </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <td>Name:</td>
+                    
+                        {admins.length > 0 ? (
+                            admins.map(admin => (
+                              <tr>
+                              <td>{admin.name}</td>
+                              <td>{admin.email}</td>
+                              <td>{admin.addedDate}</td>
+                              <td><Link to="/AppRoutes/manageAdmins" className="btn btn-sm btn-gradient-info mr-2"><i className="mdi mdi-rotate-left"></i></Link>
+                              <Link to="/AppRoutes/manageAdmins" className="btn btn-sm btn-gradient-danger mr-2"><i className="mdi mdi-delete"></i></Link></td>
+                            </tr>
+                            ))
+                        ) : <Spinner/>}
+                    
                     </tbody>
                   </table>
                 </div>
@@ -38,14 +49,17 @@ const ManageAdmins = ({
             </div>
           </div>
         </div>
-
-    );
-  }
-  
-
+        
+    </Fragment>
+};
 
 ManageAdmins.propTypes = {
-  admins: PropTypes.object.isRequired
-}
+    getAllAdmins: PropTypes.func.isRequired,
+    getData: PropTypes.object.isRequired
+};
 
-export default ManageAdmins;
+const mapStateToProps = state => ({
+    getData: state.getData
+})
+
+export default connect( mapStateToProps, {getAllAdmins})(ManageAdmins);

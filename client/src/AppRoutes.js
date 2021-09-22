@@ -10,9 +10,9 @@ import Dashboard from "./components/dashboard";
 import AddProduct from "./components/addProduct";
 import manageProduct from "./components/manageProduct";
 import updateProduct from "./components/updateProduct";
+import viewProduct from "./components/viewProduct";
 import manageOrders from "./components/manageOrders";
 import manageAdmins from "./components/manageAdmins";
-import getAdmins from "./components/getAdmins";
 import addAdmin from "./components/addAdmin";
 import Navbar from './components/shared/Navbar';
 import Sidebar from './components/shared/Sidebar';
@@ -21,8 +21,6 @@ import SettingsPanel from './components/shared/SettingsPanel';
 import Spinner from './components/shared/Spinner';
 import App from './App';
 import PrivateRoute from './components/routing/privateRoute';
-
-
 
 class AppRoutes extends Component {
   render () {
@@ -43,9 +41,9 @@ class AppRoutes extends Component {
                       <PrivateRoute path='/AppRoutes/addProduct' component={AddProduct} />
                       <PrivateRoute path='/AppRoutes/manageProduct' component={manageProduct} />
                       <PrivateRoute path='/AppRoutes/updateProduct' component={updateProduct} />
+                      <PrivateRoute path='/AppRoutes/viewProduct/:id' component={viewProduct} />
                       <PrivateRoute path='/AppRoutes/manageOrders' component={manageOrders} />
                       <PrivateRoute path='/AppRoutes/manageAdmins' component={manageAdmins} />
-                      <PrivateRoute path='/AppRoutes/getAdmins' component={getAdmins} />
                       <PrivateRoute path='/AppRoutes/addAdmin' component={addAdmin} />
                     </Switch>
                   </Suspense>

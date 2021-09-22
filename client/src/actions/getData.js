@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_ADMIN_DATA, GET_DATA_ERROR } from './types';
+import { GET_ADMIN_DATA, GET_PRODUCT_DATA, GET_PRODUCT_BY_ID, GET_CATEGORIES, GET_DATA_ERROR } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 // GET All Admins
@@ -12,8 +12,51 @@ export const getAllAdmins = () => async dispatch => {
             type: GET_ADMIN_DATA,
             payload: res.data 
         });
-    
-
 };
 
+// GET All Products
+export const getAllProducts = () => async dispatch => {
 
+    const res = await axios.get('http://localhost:5000/api/getProductData');
+
+    dispatch({
+        type: GET_PRODUCT_DATA,
+        payload: res.data 
+    });
+}
+
+
+// GET Product By Id
+export const getProduct = (_id) => async dispatch => {
+    try{
+    const config = {
+        headers: {
+            'content-Type': 'application/json'
+        }
+    };
+
+    const body = JSON.stringify({ _id });
+
+    const res = await axios.get('http://localhost:5000/api/getProduct/'+_id);
+
+    dispatch({
+        type: GET_PRODUCT_BY_ID,
+        payload: res.data 
+    });
+    }catch{
+        dispatch({
+            type: GET_DATA_ERROR
+        });
+    }
+}
+
+// GET Categories
+export const getCategories = () => async dispatch => {
+
+    const res = await axios.get('http://localhost:5000/api/getCategories');
+
+    dispatch({
+        type: GET_CATEGORIES,
+        payload: res.data 
+    });
+}

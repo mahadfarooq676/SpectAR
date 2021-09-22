@@ -18,8 +18,13 @@ app.use(express.json({ extended: false }));
 app.use('/api/admin', require('./routes/api/admin'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/getAdminData', require('./routes/api/getAdminData'));
+app.use('/api/getProductData', require('./routes/api/getProductData'));
+app.use('/api/getProduct', require('./routes/api/getProductById'));
+app.use('/api/getCategories', require('./routes/api/getCategories'));
 app.use('/api/userSignup', require('./routes/api/userSignup'));
 app.use('/api/userLogin', require('./routes/api/userLogin'));
+app.use('/api/addProduct', require('./routes/api/addProduct'));
+app.use('/api/updateProduct', require('./routes/api/updateProduct'));
 
 if(process.env.NODE_ENV == 'production'){
     app.use(express.static('client/build'));
