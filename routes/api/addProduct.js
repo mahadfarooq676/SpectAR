@@ -1,50 +1,61 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
-const config = require('config');
 const Product = require('../../models/model_product'); 
+const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./images/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+
+// var upload = multer({
+//     storage: storage,
+//     fileFilter: (req, file, cb) => {
+//         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+//             cb(null, true);
+//         } else {
+//             cb(null, false);
+//             return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+//         }
+//     }
+// });
+
+const upload = multer({ storage: storage })
+
 
 // @route POST api/product
 // @desc Add Product 
 // @access Public
-router.post('/',[
-    check('productName', 'Product Name is required').not().isEmpty(),
-    check('productPrice', 'Product Price is required').not().isEmpty(),
-    check('productCategory', 'Product Category is required').not().isEmpty(),
-    check('productQuantity', 'Product Quantity is required').not().isEmpty(),
-    check('frameLength', 'Frame Length is required').not().isEmpty(),
-    check('frameWeight', 'Frame Weight is required').not().isEmpty(),
-    check('lensWidth', 'Lens Width is required').not().isEmpty(),
-    check('lensHeight', 'Lens Height Code is required').not().isEmpty(),
-    check('templeLength', 'Temple Length is required').not().isEmpty(),
-    check('bridgeWidth', 'Bridge Width is required').not().isEmpty(),
-    check('productImage', 'Product Image is required').not().isEmpty(),
-    check('status', 'Status is required').not().isEmpty(),
-],async (req,res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array() })
-    }
-    const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, 
-        lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate } = req.body;
+router.post('/', upload.single('productImage'), async (req,res) => {
+    const url = req.protocol + '://' + req.get('host')
+
+    // const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, 
+    //     lensWidth, lensHeight, templeLength, bridgeWidth, status, addedBy, addedDate } = req.body;
     
+    // const { productImage }= url + '/images/' + req.file.filename;
+
     try{
 
-       product = new Product({
-            productName,
-            productPrice,
-            productCategory,
-            productQuantity,
-            frameLength,
-            frameWeight,
-            lensWidth,
-            lensHeight,
-            templeLength,
-            bridgeWidth,
-            productImage,
-            status,
-            addedBy, 
-            addedDate
+      const product = new Product({
+            productName: req.body.productName,
+            productPrice: req.body.productPrice,
+            productCategory: req.body.productCategory,
+            productQuantity: req.body.productQuantity,
+            frameLength: req.body.frameLength,
+            frameWeight: req.body.frameWeight,
+            lensWidth: req.body.lensWidth,
+            lensHeight: req.body.lensHeight,
+            templeLength: req.body.templeLength,
+            bridgeWidth: req.body.bridgeWidth,
+            productImage: req.file.originalname, 
+            status: req.body.status,
+            addedBy: req.body.addedBy, 
+            addedDate: req.body.addedDate,
         });
 
         await product.save();

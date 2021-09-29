@@ -1,5 +1,5 @@
 import {
-    ADD_PRODUCT
+    ADD_PRODUCT, UPDATE_PRODUCT
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +16,12 @@ export default function(state = initialState, action) {
                 ...state,
                 ...payload
             };
+
+        case UPDATE_PRODUCT: 
+        return{
+            ...state,
+            ...payload
+        };
 
         default:
             return state;

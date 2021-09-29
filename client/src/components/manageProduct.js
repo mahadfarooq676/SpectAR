@@ -60,7 +60,7 @@ const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
                               <td>{product.productType}</td>
                               <td>{product.productQuantity}</td>
                               <td><Link className="btn btn-sm btn-gradient-success mr-2" to={`/appRoutes/viewProduct/${product._id}`} ><i className="mdi mdi-eye"></i></Link>
-                              <Link className="btn btn-sm btn-gradient-info mr-2" to="/appRoutes/updateProduct"><i className="mdi mdi-rotate-left"></i></Link>
+                              <Link className="btn btn-sm btn-gradient-info mr-2" to={`/appRoutes/updateProduct/${product._id}`}><i className="mdi mdi-rotate-left"></i></Link>
                               <Link className="btn btn-sm btn-gradient-danger mr-2" onClick={() => deleteProduct(product._id)} ><i className="mdi mdi-delete"></i></Link></td>
                             </tr>
                             ))

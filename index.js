@@ -13,6 +13,8 @@ const app = express();
 
 app.use(express.json({ extended: false }));
 
+app.use('/images', express.static('images'));
+
 // app.get('/', (res,req) => res.send('API RUNNING'));
 
 app.use('/api/admin', require('./routes/api/admin'));
@@ -21,8 +23,8 @@ app.use('/api/getAdminData', require('./routes/api/getAdminData'));
 app.use('/api/getProductData', require('./routes/api/getProductData'));
 app.use('/api/getProduct', require('./routes/api/getProductById'));
 app.use('/api/getCategories', require('./routes/api/getCategories'));
-app.use('/api/userSignup', require('./routes/api/userSignup'));
-app.use('/api/userLogin', require('./routes/api/userLogin'));
+app.use('/api/userSignup', require('./routes/AppApi/userSignup'));
+app.use('/api/userLogin', require('./routes/AppApi/userLogin'));
 app.use('/api/addProduct', require('./routes/api/addProduct'));
 app.use('/api/updateProduct', require('./routes/api/updateProduct'));
 

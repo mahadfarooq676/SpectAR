@@ -148,10 +148,18 @@ const ViewProducts = () => {
                               <th>Bridge Width</th>
                               <td>{product.bridgeWidth} mm</td>
                             </tr>
+                            <tr>
+                              <th>Image</th>
+                              <td>{product.productImage}</td>
+                            </tr>
+                            <tr>
+                              <th>Status</th>
+                              <td>{product.status}</td>
+                            </tr>
                     </tbody>
                   </table>
                             <div style={{ width: "70%", margin:"0 auto", paddingTop:"40px" }}>
-                            <Link className="btn btn-warning" style={{ width:"200px" }} to="updateProduct"><i className="mdi mdi-rotate-left"></i>Update</Link>
+                            <Link className="btn btn-warning" style={{ width:"200px" }} to={`/appRoutes/updateProduct/${product._id}`}><i className="mdi mdi-rotate-left"></i>Update</Link>
                             <Link className="btn btn-danger" style={{ width:"200px" }}><i className="mdi mdi-delete"></i>Delete</Link>
                             <Link className="btn btn-primary" style={{ width:"200px" }} to="/appRoutes/manageProduct"><i className="mdi mdi-arrow-left"></i>Go Back</Link>
                             </div>

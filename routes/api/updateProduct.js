@@ -7,7 +7,8 @@ const Product = require('../../models/model_product');
 // @route POST api/product
 // @desc Add Product 
 // @access Public
-router.post('/',[
+router.put('/',[
+    check('productId', 'Product Id is required').not().isEmpty(),
     check('productName', 'Product Name is required').not().isEmpty(),
     check('productPrice', 'Product Price is required').not().isEmpty(),
     check('productCategory', 'Product Category is required').not().isEmpty(),
@@ -25,29 +26,30 @@ router.post('/',[
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array() })
     }
-    const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, 
-        lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate } = req.body;
+    const { productId, productName, productPrice, productCategory, productQuantity, frameLength, frameWeight,
+         lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate } = req.body;
     
     try{
 
-       product = new Product({
-            productName,
-            productPrice,
-            productCategory,
-            productQuantity,
-            frameLength,
-            frameWeight,
-            lensWidth,
-            lensHeight,
-            templeLength,
-            bridgeWidth,
-            productImage,
-            status,
-            addedBy, 
-            addedDate
-        });
+        var updateProduct = {
+            productName: productName,
+            productPrice: productPrice,
+            productCategory: productCategory,
+            productQuantity: productQuantity,
+            frameLength: frameLength,
+            frameWeight: frameWeight,
+            lensWidth: lensWidth,
+            lensHeight: lensHeight,
+            templeLength: templeLength,
+            bridgeWidth: bridgeWidth,
+            productImage: productImage,
+            status: status,
+            addedBy: addedBy,
+            addedDate: addedDate
+        }
+        
 
-        await product.save();
+        await Product.findByIdAndUpdate( productId, { $set: updateProduct } );
         return res.status(200).json([{ msg: 'Product Updated successfully' }] );
     
     }catch(err){

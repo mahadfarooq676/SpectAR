@@ -10,6 +10,7 @@ export const GET_PRODUCT_DATA = 'GET_PRODUCT_DATA';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_DATA_ERROR = 'GET_DATA_ERROR';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID';
 export const GET_PRODUCT_Failed = 'GET_PRODUCT_Failed';
 export const LOGOUT = 'LOGOUT';

@@ -47,14 +47,13 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
         addProduct({ productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate, lastUpdateBy, lastUpdateDate }, history);
     };
 
-  
     return (
-      <div className="col-12 grid-margin stretch-card">
+          <div className="col-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
                 <h4 className="card-title">Add Product</h4>
                 <p className="card-description">  </p>
-                <form className="forms-sample" onSubmit={e => onSubmit(e)} >
+                <form className="forms-sample" onSubmit={e => onSubmit(e)} encType='multipart/form-data' >
                   <Form.Group>
                     <label htmlFor="productName">Name</label>
                     <Form.Control type="text" name="productName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Name" />
@@ -120,14 +119,16 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                   </Form.Group> */}
                   <Form.Group>
                     <label htmlFor="productImage">Product Image</label>
-                    <Form.Control type="text" name="productImage" className="form-control" onChange={e => onChange(e)} placeholder="Enter Product Image" />
+                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={e => onChange(e)} placeholder="Enter Product Image" />
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
                   <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
             </div>
+            <div class="preview-images"></div>
           </div>
+
     );
   }
 
