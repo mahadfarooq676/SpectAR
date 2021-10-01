@@ -34,8 +34,7 @@ router.post('/',[
     return res.status(200).json([{ status:'200', description:'success', User: loggedInUser, Category: category }] );
     
     }catch(err){
-        console.log(err.message);
-        res.status(500).json([{ status:'500', description:'Internal Server Error', msg:'Internal Server Error' }] );
+        return res.status(500).json([{ status:'500', description:'Internal Server Error', msg:'Internal Server Error' }] );
     }
         
     

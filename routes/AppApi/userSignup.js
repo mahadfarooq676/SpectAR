@@ -53,11 +53,10 @@ router.post('/',[
         user.password = await bcrypt.hash(password, salt);
 
         await user.save();
-        return res.status(200).json([{ msg: 'User created successfully' }] );
+        return res.status(200).json([{ status:'200', description:'Success', msg: 'Sign Up successfully' }] );
     }
     }catch(err){
-        console.log(err.message);
-        res.status(500).send('server error');
+        return res.status(500).json([{ status:'500', description:'Internal Server Error', msg:'Internal Server Error' }] );
     }
         
     
