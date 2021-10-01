@@ -15,10 +15,6 @@ router.post('/',[
     check('email', 'Please enter valid email').isEmail(),
     check('password', 'Please enter atleast 6 characters password').isLength({ min:6 }),
     check('gender', 'Gender is required').not().isEmpty(),
-    check('address', 'Address is required').not().isEmpty(),
-    check('city', 'City is required').not().isEmpty(),
-    check('country', 'Country is required').not().isEmpty(),
-    check('postalCode', 'Postal Code is required').not().isEmpty(),
     check('phone', 'Phone is required').not().isEmpty()
 ],async (req,res) => {
     const errors = validationResult(req);
