@@ -22,7 +22,7 @@ router.post('/',[
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const { firstName, lastName, email, password, gender, address, city, country, postalCode, phone } = req.body;
+    const { firstName, lastName, email, password, gender, phone } = req.body;
 
     try{
         
@@ -38,10 +38,6 @@ router.post('/',[
         email,
         password,
         gender,
-        address,
-        city,
-        country,
-        postalCode,
         phone
         });
 
