@@ -31,7 +31,7 @@ router.post('/',[
     const category = await Category.find();
     const loggedInUser = await User.findOne({email})
     
-    return res.status(200).json([{ status:'200', description:'success', User: loggedInUser, Category: category }] );
+    return res.status(200).json([{ status:'200', description:'Success', User: loggedInUser, Category: category }] );
     
     }catch(err){
         return res.status(500).json([{ status:'500', description:'Internal Server Error', msg:'Internal Server Error' }] );
