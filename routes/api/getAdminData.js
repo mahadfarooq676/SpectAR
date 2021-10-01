@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 router.get('/', async (req, res) => {
     try{
-        const admin = await Admin.find(req.admin);
+        const admin = await Admin.find();
         res.json(admin);
     }catch(err){
        console.log(err.message);

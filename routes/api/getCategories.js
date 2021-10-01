@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 router.get('/', async (req, res) => {
     try{
-        const category = await Category.find(req.category);
+        const category = await Category.find();
         res.json(category);
     }catch(err){
        console.log(err.message);

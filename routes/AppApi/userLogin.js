@@ -28,10 +28,10 @@ router.post('/',[
     if(!isMatch){
         return res.status(400).json([{ status:'400', description:'Invalid Credentials', msg:'Invalid credentials' }] );
     }
-    const category = await Category.find(req.category);
-    const loggedInUser = await User.findOne( email )
+    const category = await Category.find();
+    const loggedInUser = await User.findOne({email})
     
-    return res.status(200).json([{ status:'200', description:'success', User: user, Category: category }] );
+    return res.status(200).json([{ status:'200', description:'success', User: loggedInUser, Category: category }] );
     
     }catch(err){
         console.log(err.message);
@@ -40,5 +40,5 @@ router.post('/',[
         
     
 })
-//
+
 module.exports = router;
