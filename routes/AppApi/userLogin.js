@@ -21,12 +21,12 @@ router.post('/',[
     let user = await User.findOne({ email });
 
     if(!user){
-        return res.status(400).json([{ status: '400', description:'Invalid Credentials', msg: 'Invalid credentials' }] );
+        return res.status(400).json([{ status: '400', description:'Invalid Credentials', User: {}, Category: [{}] }] );
     }
     
     const isMatch = await bcrypt.compare(password, user.password);
     if(!isMatch){
-        return res.status(400).json([{ status:'400', description:'Invalid Credentials', msg:'Invalid credentials' }] );
+        return res.status(400).json([{ status:'400', description:'Invalid Credentials', User: {}, Category: [{}] }] );
     }
     const category = await Category.find();
     const loggedInUser = await User.findOne({email})
@@ -34,7 +34,7 @@ router.post('/',[
     return res.status(200).json([{ status:'200', description:'Success', User: loggedInUser, Category: category }] );
     
     }catch(err){
-        return res.status(500).json([{ status:'500', description:'Internal Server Error', msg:'Internal Server Error' }] );
+        return res.status(500).json([{ status:'500', description:'Internal Server Error', User: {}, Category: [{}] }] );
     }
         
     

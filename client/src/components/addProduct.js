@@ -14,7 +14,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
     getCategories()
   }, [])
 
-    const [formData, setFormData] = useState({
+      const [inputField, setInputField] = useState({
       productName: '',
       productPrice:  '',
       productCategory: '',
@@ -28,6 +28,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
       productImage: '',
       status: ''
     });
+
      let addedBy = admin && admin.name;
      var addedDate = new Date();
   var dd = String(addedDate.getDate()).padStart(2, '0');
@@ -37,14 +38,41 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
   addedDate = mm + '/' + dd + '/' + yyyy;
   var lastUpdateBy = "None";
   var lastUpdateDate = "None";
-    const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status } = formData;
+
   
     const onChange = e => 
-        setFormData({ ...formData, [e.target.name]: e.target.value});
+    setInputField({ ...inputField, [e.target.name]: e.target.value});
+
+    const imageUpload = (event) => {
+      setInputField({ ...inputField, productImage: event.target.files[0]});
+    }
   
     const onSubmit = async e => {
         e.preventDefault();
-        addProduct({ productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate, lastUpdateBy, lastUpdateDate }, history);
+        if( !inputField.productName || !inputField.productPrice || !inputField.productCategory || !inputField.productQuantity || !inputField.frameLength ||
+          !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || 
+          !inputField.bridgeWidth || inputField.productImage.length <= 0 || !inputField.status ){
+          setAlert('All fiels are required','danger');
+      }else{
+
+        const formdata = new FormData();
+        formdata.append('myFile', inputField.productImage, inputField.productImage.name)
+        formdata.append('productName', inputField.productName);
+        formdata.append('productPrice', inputField.productPrice);
+        formdata.append('productCategory', inputField.productCategory);
+        formdata.append('productQuantity', inputField.productQuantity);
+        formdata.append('frameLength', inputField.frameLength);
+        formdata.append('frameWeight', inputField.frameWeight);
+        formdata.append('lensWidth', inputField.lensWidth);
+        formdata.append('lensHeight', inputField.lensHeight);
+        formdata.append('templeLength', inputField.templeLength);
+        formdata.append('bridgeWidth', inputField.bridgeWidth);
+        formdata.append('status', inputField.status);
+        formdata.append('addedBy', addedBy);
+        formdata.append('addedDate', addedDate);
+
+      addProduct(formdata, history);
+      }
     };
 
     return (
@@ -111,15 +139,9 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                       <option value="Deleted">Deleted</option>
                     </select>
                   </Form.Group>
-                  {/* <Form.Group>
-                    <label>Image</label>
-                    <div className="custom-file">
-                      <Form.Control type="file" className="form-control" name="productImage" id="customFileLang" lang="es" style={{ height:"40px" }}/>
-                    </div>
-                  </Form.Group> */}
                   <Form.Group>
                     <label htmlFor="productImage">Product Image</label>
-                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={e => onChange(e)} placeholder="Enter Product Image" />
+                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Image" />
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
                   <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>
