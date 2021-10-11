@@ -21,7 +21,23 @@ router.post('/',[
     let user = await User.findOne({ email });
 
     if(!user){
-        return res.status(400).json([{ status: '400', description:'Invalid Credentials', User: {}, Category: [{}] }] );
+        return res.status(400).json([{ status:'400', description:'Invalid Credentials', User: {
+            "_id": "",
+            "firstName": "",
+            "lastName": "",
+            "email": "",
+            "password": "",
+            "gender": "",
+            "address": "",
+            "city": "",
+            "country": "",
+            "postalCode": "",
+            "phone": "",
+            "__v": 0
+        }, Category: [{
+            "_id": "",
+                "name": ""
+        }] }] );
     }
     
     const isMatch = await bcrypt.compare(password, user.password);
@@ -50,7 +66,23 @@ router.post('/',[
     return res.status(200).json([{ status:'200', description:'Success', User: loggedInUser, Category: category }] );
     
     }catch(err){
-        return res.status(500).json([{ status:'500', description:'Internal Server Error', User: {}, Category: [{}] }] );
+        return res.status(500).json([{ status:'500', description:'Internal Server Error', User: {
+            "_id": "",
+            "firstName": "",
+            "lastName": "",
+            "email": "",
+            "password": "",
+            "gender": "",
+            "address": "",
+            "city": "",
+            "country": "",
+            "postalCode": "",
+            "phone": "",
+            "__v": 0
+        }, Category: [{
+            "_id": "",
+                "name": ""
+        }] }] );
     }
         
     
