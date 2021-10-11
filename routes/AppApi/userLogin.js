@@ -26,7 +26,23 @@ router.post('/',[
     
     const isMatch = await bcrypt.compare(password, user.password);
     if(!isMatch){
-        return res.status(400).json([{ status:'400', description:'Invalid Credentials', User: {}, Category: [{}] }] );
+        return res.status(400).json([{ status:'400', description:'Invalid Credentials', User: {
+            "_id": "",
+            "firstName": "",
+            "lastName": "",
+            "email": "",
+            "password": "",
+            "gender": "",
+            "address": "",
+            "city": "",
+            "country": "",
+            "postalCode": "",
+            "phone": "",
+            "__v": 0
+        }, Category: [{
+            "_id": "",
+                "name": ""
+        }] }] );
     }
     const category = await Category.find();
     const loggedInUser = await User.findOne({email})
