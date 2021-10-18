@@ -19,7 +19,7 @@ router.post('/',[
 ],async (req,res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array() })
+        return res.json({ errors: errors.array() })
     }
 
     const { firstName, lastName, email, password, gender, phone } = req.body;
@@ -29,7 +29,7 @@ router.post('/',[
     let user = await User.findOne({ email });
 
     if(user){
-        return res.status(400).json([{ status:'400', description:'User already exists' }] );
+        return res.json([{ status:'400', description:'User already exists' }] );
     }else{
 
        user = new User({
@@ -45,10 +45,10 @@ router.post('/',[
         user.password = await bcrypt.hash(password, salt);
 
         await user.save();
-        return res.status(200).json([{ status:'200', description:'Signup Successfully' }] );
+        return res.json([{ status:'200', description:'Signup Successfully' }] );
     }
     }catch(err){
-        return res.status(500).json([{ status:'500', description:'Internal Server Error' }] );
+        return res.json([{ status:'500', description:'Internal Server Error' }] );
     }
         
     
