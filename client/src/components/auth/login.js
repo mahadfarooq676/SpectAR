@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Redirect } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
@@ -32,42 +33,33 @@ if(isAuthenticated) {
 }
 
         return (
+            
             <div>
-               
-                <div className="row col-lg-6 float-left bg-primary" style={{position:"fixed", width:"100%", height:"100%", left:"0", top:"0"}}>
-                    {/* <img  src={ LoginCover } style={{ width:"100%", height:"100%" }}></img> */}
-                    <div className="col-lg-6 float-right ml-5" style={{position: "absolute", top: "45%"}}>
-                        <h1>SpectAR</h1>
+                <div className="d-flex align-items-center auth px-0" style={{ marginTop:"80px" }}>
+                <div className="row w-100 mx-0">
+                    <div className="col-lg-4 mx-auto">
+                    <div><Alert/></div>
+                    <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <div className="brand-logo">
+                        <img src={require('../../assets/images/SpectARLogo1.png').default} alt="logo" />
+                        </div>
+                        <h4>Hello! let's get started</h4>
+                        <h6 className="font-weight-light">Sign in to continue.</h6>
+                        <form onSubmit={e => onSubmit(e)} className="pt-3">
+                        <Form.Group className="d-flex search-field">
+                        <input type="email" className="form-control h-auto" name="email" onChange={e => onChange(e)} placeholder="Enter email"/>
+                        </Form.Group>
+                        <Form.Group className="d-flex search-field">
+                        <input type="password" className="form-control h-auto" name="password" onChange={e => onChange(e)} placeholder="Enter password" />
+                        </Form.Group>
+                        <div className="mt-3">
+                            <input type="submit"className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" name="submit" value="SIGN IN" />
+                        </div>
+                        </form>
+                    </div>
                     </div>
                 </div>
-                <div className="col-lg-6 float-right ml-5" style={{marginTop:"200px"}}>
-                    <form className="col-lg-10" onSubmit={e => onSubmit(e)}>
-                    <div><Alert/></div>
-                        <h3>Sign In</h3>
-
-                        <div className="form-group">
-                            <label>Email address</label>
-                            <input type="email" className="form-control" name="email" onChange={e => onChange(e)} placeholder="Enter email" />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input type="password" className="form-control" name="password" onChange={e => onChange(e)} placeholder="Enter password" />
-                        </div>
-
-                        {/* <div className="form-group">
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                            </div>
-                        </div> */}
-
-                        <input type="submit"className="btn btn-primary btn-block" name="submit" value="Login" />
-                        {/* <p className="forgot-password text-right">
-                            Forgot <a href="#">password?</a>
-                        </p> */}
-                    </form>
-                </div>
+                </div>  
             </div>
         );
     
