@@ -6,7 +6,8 @@ import { setAlert } from '../actions/alert';
 import { addProduct } from '../actions/add';
 import { getCategories } from '../actions/getData';
 import PropTypes from 'prop-types';
-
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , history, getData: { categories } }) => {
 
@@ -16,9 +17,16 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
 
       const [inputField, setInputField] = useState({
       productName: '',
+      brandName: 'No Brand',
       productPrice:  '',
+      salesPrice: '0',
+      sku: '',
       productCategory: '',
       productQuantity: '',
+      shortDescription: '',
+      highlights: 'No Highlights',
+      detailedDescription: '',
+      materialType: '',
       frameLength:  '',
       frameWeight: '',
       lensWidth: '',
@@ -26,6 +34,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
       templeLength:  '',
       bridgeWidth: '',
       productImage: '',
+      product3dFile: '',
       status: ''
     });
 
@@ -46,21 +55,43 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
     const imageUpload = (event) => {
       setInputField({ ...inputField, productImage: event.target.files[0]});
     }
+
+    const File3dUpload = (event) => {
+      setInputField({ ...inputField, product3dFile: event.target.files[0]});
+    }
+
+    // const highlights = (event) => {
+    //   setInputField({ ...inputField, highlights: event.target.highlights});
+    // }
   
     const onSubmit = async e => {
         e.preventDefault();
-        if( !inputField.productName || !inputField.productPrice || !inputField.productCategory || !inputField.productQuantity || !inputField.frameLength ||
+        if( !inputField.productName || !inputField.productPrice || !inputField.sku || !inputField.productCategory || !inputField.productQuantity|| !inputField.shortDescription || !inputField.detailedDescription || !inputField.materialType || !inputField.frameLength ||
           !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || 
-          !inputField.bridgeWidth || inputField.productImage.length <= 0 || !inputField.status ){
+          !inputField.bridgeWidth || inputField.productImage.length <= 0 || inputField.product3dFile.length <= 0 || !inputField.status ){
           setAlert('All fiels are required','danger');
+      }else if(!inputField.brandName){
+        setInputField({ ...inputField, brandName: 'No Brand'})
+      }else if(!inputField.salesPrice){
+        setInputField({ ...inputField, salesPrice: '0'})
+      }else if(!inputField.highlights){
+        setInputField({ ...inputField, highlights: 'No Highlights'})
       }else{
 
         const formdata = new FormData();
-        formdata.append('myFile', inputField.productImage, inputField.productImage.name)
+        formdata.append('productImage', inputField.productImage, inputField.productImage.name);
+        formdata.append('product3dFile', inputField.product3dFile, inputField.product3dFile.name);
         formdata.append('productName', inputField.productName);
+        formdata.append('brandName', inputField.brandName);
         formdata.append('productPrice', inputField.productPrice);
+        formdata.append('salesPrice', inputField.salesPrice);
+        formdata.append('sku', inputField.sku);
         formdata.append('productCategory', inputField.productCategory);
         formdata.append('productQuantity', inputField.productQuantity);
+        formdata.append('shortDescription', inputField.shortDescription);
+        formdata.append('highlights', inputField.highlights);
+        formdata.append('detailedDescription', inputField.detailedDescription);
+        formdata.append('materialType', inputField.materialType);
         formdata.append('frameLength', inputField.frameLength);
         formdata.append('frameWeight', inputField.frameWeight);
         formdata.append('lensWidth', inputField.lensWidth);
@@ -83,17 +114,29 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                 <p className="card-description">  </p>
                 <form className="forms-sample" onSubmit={e => onSubmit(e)} encType='multipart/form-data' >
                   <Form.Group>
-                    <label htmlFor="productName">Name</label>
-                    <Form.Control type="text" name="productName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Name" />
+                    <label htmlFor="productName">Title</label>
+                    <Form.Control type="text" name="productName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Title" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="brandName">Brand Name</label>
+                    <Form.Control type="text" name="brandName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Brand Name" />
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="productPrice">Price</label>
                     <Form.Control type="number" name="productPrice" className="form-control" onChange={e => onChange(e)} placeholder="Enter Price" />
                   </Form.Group>
                   <Form.Group>
+                    <label htmlFor="salesPrice">Sales Price</label>
+                    <Form.Control type="number" name="salesPrice" className="form-control" onChange={e => onChange(e)} placeholder="Enter Sales Price" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="salesPrice">SKU</label>
+                    <Form.Control type="text" name="sku" maxlength="16" className="form-control" onChange={e => onChange(e)} placeholder="Enter SKU" />
+                  </Form.Group>
+                  <Form.Group>
                     <label htmlFor="productCategory">Category</label>
                     <select className="form-control" name="productCategory" onChange={e => onChange(e)}>
-                      <option>Select Category</option>
+                      <option selected disabled>Select Category</option>
                       {categories.length > 0 ? (
                             categories.map(category => (
                             <option value={category.id}>{category.name}</option>
@@ -105,6 +148,38 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                   <Form.Group>
                     <label htmlFor="productQuantity">Quantity</label>
                     <Form.Control type="number" name="productQuantity" className="form-control" onChange={e => onChange(e)} placeholder="Enter Quantity" />
+                  </Form.Group>
+                  
+                  <Form.Group>
+                    <label htmlFor="shortDescription">Short Description</label>
+                    <textarea name="shortDescription" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Short Description" rows="5"></textarea>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="highlights">Highlights</label>
+                    <textarea name="highlights" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Highlights" rows="5"></textarea>
+                  </Form.Group>
+                  {/* <Editor
+                    wrapperClassName="wrapper-class"
+                    editorClassName="editor-class"
+                    toolbarClassName="toolbar-class"
+                    toolbar={{
+                      options: ['inline','list', 'history'],
+                      
+                  }} onChange={e => highlights(e)} 
+                  /> */}
+                  
+                  <Form.Group>
+                    <label htmlFor="detailedDescription">Detailed Description</label>
+                    <textarea name="detailedDescription" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Detailed Description" rows="5"></textarea>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="materialType">Material Type</label>
+                    <select className="form-control" name="materialType" onChange={e => onChange(e)}>
+                      <option selected disabled >Select Material Type</option>
+                      <option value="Plastic">Plastic</option>
+                      <option value="Metal">Metal</option>
+                      <option value="Steel">Steel</option>
+                    </select>
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="frameLength">Frame Length</label>
@@ -133,7 +208,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                   <Form.Group>
                     <label htmlFor="status">Status</label>
                     <select className="form-control" name="status" onChange={e => onChange(e)}>
-                      <option>Select Status</option>
+                      <option selected disabled>Select Status</option>
                       <option value="Active">Active</option>
                       <option value="Deactive">Deactive</option>
                       <option value="Deleted">Deleted</option>
@@ -141,7 +216,11 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="productImage">Product Image</label>
-                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Image" />
+                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Image" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="product3dFile">Product 3d File </label>
+                    <Form.Control type="file" accept=".obj" name="product3dFile" className="form-control" onChange={File3dUpload} placeholder="Enter Product 3d File" />
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
                   <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>

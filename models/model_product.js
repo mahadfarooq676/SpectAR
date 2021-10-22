@@ -6,7 +6,19 @@ const product = new mongoose.Schema({
         type: String,
         required: true
     },
+    brandName: {
+        type: String,
+        required: true
+    },
     productPrice: {
+        type: String,
+        required: true
+    },
+    salesPrice: {
+        type: String,
+        required: true
+    },
+    sku: {
         type: String,
         required: true
     },
@@ -15,6 +27,22 @@ const product = new mongoose.Schema({
         required: true
     },
     productQuantity: {
+        type: String,
+        required: true
+    },
+    shortDescription: {
+        type: String,
+        required: true
+    },
+    highlights: {
+        type: String,
+        required: true
+    },
+    detailedDescription: {
+        type: String,
+        required: true
+    },
+    materialType: {
         type: String,
         required: true
     },
@@ -43,6 +71,10 @@ const product = new mongoose.Schema({
         required: true
     },
     productImage: {
+        type: String,
+        required: true
+    },
+    product3dFile: {
         type: String,
         required: true
     },

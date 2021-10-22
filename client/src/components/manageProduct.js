@@ -15,16 +15,15 @@ const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
 
     const deleteProduct = async (_id) => {
       confirmAlert({
-        title: 'Confirm to submit',
+        title: 'Confirm to delete',
         message: 'Are you sure to do this.',
         buttons: [
           {
             label: 'Yes',
-            onClick: () => products.filter(product => (product._id != _id))
+            onClick: () => products.filter(product => (product._id !== _id))
           },
           {
-            label: 'No',
-            onClick: () => alert()
+            label: 'No'
           }
         ]
       });
@@ -41,11 +40,12 @@ const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
                   <table className="table">
                     <thead>
                       <tr>
+                        <th> Product Image </th>
                         <th> Product Name </th>
                         <th> Product Price</th>
                         <th> Category </th>
-                        <th> Type </th>
                         <th> Quantity </th>
+                        <th> Status </th>
                         <th> Action </th>
                       </tr>
                     </thead>
@@ -54,11 +54,12 @@ const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
                         {products.length > 0 ? (
                             products.map(product => (
                               <tr>
+                              <img src={"http://localhost:5000/public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
                               <td>{product.productName}</td>
                               <td>{product.productPrice}</td>
                               <td>{product.productCategory}</td>
-                              <td>{product.productType}</td>
                               <td>{product.productQuantity}</td>
+                              <td>{product.status}</td>
                               <td><Link className="btn btn-sm btn-gradient-success mr-2" to={`/appRoutes/viewProduct/${product._id}`} ><i className="mdi mdi-eye"></i></Link>
                               <Link className="btn btn-sm btn-gradient-info mr-2" to={`/appRoutes/updateProduct/${product._id}`}><i className="mdi mdi-rotate-left"></i></Link>
                               <Link className="btn btn-sm btn-gradient-danger mr-2" onClick={() => deleteProduct(product._id)} ><i className="mdi mdi-delete"></i></Link></td>

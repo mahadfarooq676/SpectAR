@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Spinner from './layout/spinner';
 import { getProduct } from '../actions/getData';
 import axios from 'axios';
-
 // class ViewProducts extends Component{
 //    state={
 //      product:{}
@@ -93,6 +92,7 @@ const ViewProducts = () => {
 
   const [product,setProduct]=useState({});
 
+
   useEffect(async () => {
     const p= await axios.get('http://localhost:5000/api/getProduct/'+_id);
     setProduct(p.data);
@@ -109,7 +109,11 @@ const ViewProducts = () => {
                   <table className="table">
                     <tbody>
                             <tr>
-                              <th>Product Name</th>
+                              <th>Product Image</th>
+                              <img src={"http://localhost:5000/public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '200px', maxWidth: '200'}} ></img>
+                            </tr>
+                            <tr>
+                              <th>Product Title</th>
                               <td>{product.productName}</td>
                             </tr>
                             <tr>
@@ -147,10 +151,6 @@ const ViewProducts = () => {
                             <tr>
                               <th>Bridge Width</th>
                               <td>{product.bridgeWidth} mm</td>
-                            </tr>
-                            <tr>
-                              <th>Image</th>
-                              <td>{product.productImage}</td>
                             </tr>
                             <tr>
                               <th>Status</th>

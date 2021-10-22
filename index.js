@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json({ extended: false }));
 
-app.use('/images', express.static('images'));
+app.use('/public', express.static('client/public'));
 
 // app.get('/', (res,req) => res.send('API RUNNING'));
 
