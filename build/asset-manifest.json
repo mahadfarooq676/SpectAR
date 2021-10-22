@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6d437cf5.chunk.css",
+    "main.js": "/static/js/main.389b04d4.chunk.js",
+    "main.js.map": "/static/js/main.389b04d4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0367f21a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0367f21a.js.map",
+    "static/css/2.63538936.chunk.css": "/static/css/2.63538936.chunk.css",
+    "static/js/2.8d860b47.chunk.js": "/static/js/2.8d860b47.chunk.js",
+    "static/js/2.8d860b47.chunk.js.map": "/static/js/2.8d860b47.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.63538936.chunk.css.map": "/static/css/2.63538936.chunk.css.map",
+    "static/css/main.6d437cf5.chunk.css.map": "/static/css/main.6d437cf5.chunk.css.map",
+    "static/js/2.8d860b47.chunk.js.LICENSE.txt": "/static/js/2.8d860b47.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/static/media/weather.bc7a5081.svg",
+    "static/media/SpectARLogo.png": "/static/media/SpectARLogo.074a3fdb.png",
+    "static/media/SpectARLogoSm.png": "/static/media/SpectARLogoSm.3cd44482.png",
+    "static/media/circle.svg": "/static/media/circle.7fdaba90.svg",
+    "static/media/face1.jpg": "/static/media/face1.f4bf3505.jpg",
+    "static/media/face2.jpg": "/static/media/face2.f14e6948.jpg",
+    "static/media/face3.jpg": "/static/media/face3.543e4d27.jpg",
+    "static/media/face4.jpg": "/static/media/face4.ade8a387.jpg",
+    "static/media/face5.jpg": "/static/media/face5.ce964104.jpg",
+    "static/media/face6.jpg": "/static/media/face6.164f9103.jpg",
+    "static/media/product1.jpg": "/static/media/product1.cb80ad78.jpg",
+    "static/media/product2.jpg": "/static/media/product2.1fd01e11.jpg",
+    "static/media/product5.jpg": "/static/media/product5.25736986.jpg",
+    "static/media/product6.jpg": "/static/media/product6.ade537aa.jpg",
+    "static/media/spinner.7f686c03.gif": "/static/media/spinner.7f686c03.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0367f21a.js",
+    "static/css/2.63538936.chunk.css",
+    "static/js/2.8d860b47.chunk.js",
+    "static/css/main.6d437cf5.chunk.css",
+    "static/js/main.389b04d4.chunk.js"
+  ]
+}

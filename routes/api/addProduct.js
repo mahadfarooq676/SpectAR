@@ -7,7 +7,7 @@ const datenow = Date.now();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "./client/public/uploads");
+        cb(null, "../../https://spectar-app.herokuapp.com/public/uploads/");
     },
     filename: (req, file, cb) => {
         cb(null, datenow + '-' + file.originalname );
