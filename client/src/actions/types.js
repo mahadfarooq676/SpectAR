@@ -14,3 +14,5 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID';
 export const GET_PRODUCT_Failed = 'GET_PRODUCT_Failed';
 export const LOGOUT = 'LOGOUT';
+export const URL = 'https://spectar-app.herokuapp.com/';
+// export const URL = 'http://localhost:5000/';

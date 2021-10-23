@@ -34,6 +34,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
       templeLength:  '',
       bridgeWidth: '',
       productImage: '',
+      productGallery: '',
       product3dFile: '',
       status: ''
     });
@@ -54,6 +55,11 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
 
     const imageUpload = (event) => {
       setInputField({ ...inputField, productImage: event.target.files[0]});
+    }
+
+    const galleryUpload = (event) => {
+      setInputField({ ...inputField, productgallery: event.target.files});
+      console.log(inputField.productgallery)
     }
 
     const File3dUpload = (event) => {
@@ -80,6 +86,10 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
 
         const formdata = new FormData();
         formdata.append('productImage', inputField.productImage, inputField.productImage.name);
+        for (const key of Object.keys(inputField.productGallery)) {
+          formdata.append('productGallery', inputField.productGallery[key])
+        }
+        // formdata.append('productGallery', inputField.productGallery, inputField.productGallery.name);
         formdata.append('product3dFile', inputField.product3dFile, inputField.product3dFile.name);
         formdata.append('productName', inputField.productName);
         formdata.append('brandName', inputField.brandName);
@@ -215,8 +225,12 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                     </select>
                   </Form.Group>
                   <Form.Group>
-                    <label htmlFor="productImage">Product Image</label>
-                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Image" />
+                    <label htmlFor="productImage">Product Thumbnail</label>
+                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Thumbnail" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="productGallary">Product Gallery Images</label>
+                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productGallary" className="form-control" onChange={galleryUpload} placeholder="Enter Gallery Images" />
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="product3dFile">Product 3d File </label>

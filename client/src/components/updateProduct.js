@@ -8,6 +8,7 @@ import { getCategories } from '../actions/getData';
 import PropTypes from 'prop-types';
 import Spinner from './layout/spinner';
 import axios from 'axios';
+import { URL } from './../actions/types';
 
 
 const UpdateProduct = ({ auth: { admin }, setAlert, getCategories, updateProduct , history, getData: { categories, productById } }) => {
@@ -45,7 +46,7 @@ var productId = _id;
 
 useEffect(async () => {
   getCategories();
-  const p= await axios.get('http://localhost:5000/api/getProduct/'+_id);
+  const p= await axios.get(URL + 'api/getProduct/'+_id);
   setProduct(p.data);
 },[]);
 

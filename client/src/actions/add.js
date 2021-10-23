@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { ADD_PRODUCT, UPDATE_PRODUCT } from './types';
+import { ADD_PRODUCT, UPDATE_PRODUCT, URL } from './types';
 
 
 
@@ -15,7 +15,7 @@ export const addProduct = (formdata, history) => async dispatch => {
      const body = { formdata };
 
     try{
-        const res = await axios.post('http://localhost:5000/api/addProduct', formdata);
+        const res = await axios.post(URL + 'api/addProduct', formdata);
 
         dispatch({
             type: ADD_PRODUCT,
@@ -45,7 +45,7 @@ export const updateProduct = ({ productId, productName, productPrice, productCat
     const body = JSON.stringify({ productId, productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate });
 
     try{
-        const res = await axios.put('http://localhost:5000/api/updateProduct', body, config);
+        const res = await axios.put(URL + 'api/updateProduct', body, config);
 
         dispatch({
             type: UPDATE_PRODUCT,

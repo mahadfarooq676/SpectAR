@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { ADD_ADMIN, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types';
+import { ADD_ADMIN, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, URL } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 // Load User
@@ -10,7 +10,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try{
-        const res = await axios.get('https://spectar-app.herokuapp.com/api/auth');
+        const res = await axios.get(URL + 'api/auth');
 
         dispatch({
             type: USER_LOADED,
@@ -35,7 +35,7 @@ export const register = ({name, email, password, addedBy, addedDate, deleteStatu
     const body = JSON.stringify({ name, email, password, addedBy, addedDate, deleteStatus });
 
     try{
-        const res = await axios.post('http://localhost:5000/api/admin', body, config);
+        const res = await axios.post(URL + 'api/admin', body, config);
 
         dispatch({
             type: ADD_ADMIN,
@@ -65,7 +65,7 @@ export const login = (email, password) => async dispatch => {
     const body = JSON.stringify({ email, password });
 
     try{
-        const res = await axios.post('https://spectar-app.herokuapp.com/api/auth', body, config);
+        const res = await axios.post(URL + 'api/auth', body, config);
 
         dispatch({
             type: LOGIN_SUCCESS,

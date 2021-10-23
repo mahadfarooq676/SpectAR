@@ -6,6 +6,7 @@ import { getAllProducts } from '../actions/getData';
 import Spinner from './layout/spinner';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { URL } from './../actions/types';
 
 
 const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
@@ -54,7 +55,7 @@ const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
                         {products.length > 0 ? (
                             products.map(product => (
                               <tr>
-                              <img src={"http://localhost:5000/public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
+                              <img src={URL+"public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
                               <td>{product.productName}</td>
                               <td>{product.productPrice}</td>
                               <td>{product.productCategory}</td>
