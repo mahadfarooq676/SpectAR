@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { Link  } from 'react-router-dom'
+import { Link, Redirect  } from 'react-router-dom'
+import { history } from 'react-router'
 import { connect } from 'react-redux';
 import { getAllProducts } from '../actions/getData';
 import Spinner from './layout/spinner';
@@ -9,10 +10,22 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { URL } from './../actions/types';
 
 
-const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
+const ManageProducts = ({ getAllProducts, getData: { products, loading }, history }) => {
     useEffect(() => {
         getAllProducts();
     }, []);
+
+    const viewProduct = async (_id) => {
+      localStorage.setItem('_id',_id);
+      // <Redirect to="/appRoutes/viewProduct" />
+      history.push("/appRoutes/viewProduct")
+    }
+
+    const updateProduct = async (_id) => {
+      localStorage.setItem('_id',_id);
+      // <Redirect to="/appRoutes/viewProduct" />
+      history.push("/appRoutes/updateProduct")
+    }
 
     const deleteProduct = async (_id) => {
       confirmAlert({
@@ -61,8 +74,8 @@ const ManageProducts = ({ getAllProducts, getData: { products, loading } }) => {
                               <td>{product.productCategory}</td>
                               <td>{product.productQuantity}</td>
                               <td>{product.status}</td>
-                              <td><Link className="btn btn-sm btn-gradient-success mr-2" to={`/appRoutes/viewProduct/${product._id}`} ><i className="mdi mdi-eye"></i></Link>
-                              <Link className="btn btn-sm btn-gradient-info mr-2" to={`/appRoutes/updateProduct/${product._id}`}><i className="mdi mdi-rotate-left"></i></Link>
+                              <td><Link className="btn btn-sm btn-gradient-success mr-2" onClick={() => viewProduct(product._id)} ><i className="mdi mdi-eye"></i></Link>
+                              <Link className="btn btn-sm btn-gradient-info mr-2" onClick={() => updateProduct(product._id)} ><i className="mdi mdi-rotate-left"></i></Link>
                               <Link className="btn btn-sm btn-gradient-danger mr-2" onClick={() => deleteProduct(product._id)} ><i className="mdi mdi-delete"></i></Link></td>
                             </tr>
                             ))

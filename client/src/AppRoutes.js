@@ -41,7 +41,7 @@ class AppRoutes extends Component {
                       <PrivateRoute path='/AppRoutes/addProduct' component={AddProduct} />
                       <PrivateRoute path='/AppRoutes/manageProduct' component={manageProduct} />
                       <PrivateRoute path='/AppRoutes/updateProduct' component={updateProduct} />
-                      <PrivateRoute path='/AppRoutes/viewProduct/:id' component={viewProduct} />
+                      <PrivateRoute path='/AppRoutes/viewProduct' component={viewProduct} />
                       <PrivateRoute path='/AppRoutes/manageOrders' component={manageOrders} />
                       <PrivateRoute path='/AppRoutes/manageAdmins' component={manageAdmins} />
                       <PrivateRoute path='/AppRoutes/addAdmin' component={addAdmin} />

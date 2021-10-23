@@ -13,9 +13,7 @@ import { URL } from './../actions/types';
 
 const UpdateProduct = ({ auth: { admin }, setAlert, getCategories, updateProduct , history, getData: { categories, productById } }) => {
 
-  let id = JSON.stringify(window.location.href);
-  var _id = id.substring(47, id.length-1);
-  
+  let _id = localStorage.getItem('_id');
 
   const [product,setProduct]=useState({});
 
