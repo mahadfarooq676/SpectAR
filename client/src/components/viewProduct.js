@@ -111,7 +111,7 @@ const ViewProducts = () => {
                     <tbody>
                             <tr>
                               <th>Product Image</th>
-                              <img src={URL + "public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '200px', maxWidth: '200'}} ></img>
+                              <img src={URL +"public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '200px', maxWidth: '200'}} ></img>
                             </tr>
                             <tr>
                               <th>Product Title</th>

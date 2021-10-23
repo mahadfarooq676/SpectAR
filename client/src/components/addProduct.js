@@ -59,7 +59,6 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
 
     const galleryUpload = (event) => {
       setInputField({ ...inputField, productgallery: event.target.files});
-      console.log(inputField.productgallery)
     }
 
     const File3dUpload = (event) => {
