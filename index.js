@@ -16,8 +16,7 @@ app.use(express.json({ extended: false }));
 app.use('/public', express.static('client/public'));
 
 app.use('*', function(req, res, next) {
-  //replace localhost:8080 to the ip address:port of your server
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "https://spectar-app.herokuapp.com/");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Credentials', true);
@@ -37,7 +36,7 @@ app.use('/api/getProduct', require('./routes/api/getProductById'));
 app.use('/api/getCategories', require('./routes/api/getCategories'));
 app.use('/api/userSignup', require('./routes/AppApi/userSignup'));
 app.use('/api/userLogin', require('./routes/AppApi/userLogin'));
-app.use('/api/getAllProducts', require('./routes/AppApi/getProducts'));
+app.use('/api/getProducts', require('./routes/AppApi/getProducts'));
 app.use('/api/addProduct', require('./routes/api/addProduct'));
 app.use('/api/updateProduct', require('./routes/api/updateProduct'));
 app.use('/api/addBanner', require('./routes/api/addBanner'));
