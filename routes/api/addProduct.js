@@ -10,7 +10,8 @@ const storage = multer.diskStorage({
         cb(null, "client/public/uploads/");
     },
     filename: (req, file, cb) => {
-        cb(null, datenow + '-' + file.originalname );
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, datenow + '-' + fileName)
     }
 });
 
@@ -28,9 +29,12 @@ router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'p
     //     lensWidth, lensHeight, templeLength, bridgeWidth, status, addedBy, addedDate } = req.body;
     
     // const { productImage }= url + '/images/' + req.file.filename;
-    const productImage = req.files.productImage[0];
-    const product3dFile = req.files.product3dFile[0];
-    const productGallery = req.files.product3dFile;
+    const productImage = req.files.productImage[0].filename;
+    const product3dFile = req.files.product3dFile[0].filename;
+    const reqFiles = [];
+    for (var i = 0; i < req.files.productGallery.length; i++) {
+        reqFiles.push(req.files.productGallery[i].filename)
+    }
     try{
 
       const product = new Product({
@@ -51,9 +55,9 @@ router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'p
             lensHeight: req.body.lensHeight,
             templeLength: req.body.templeLength,
             bridgeWidth: req.body.bridgeWidth,
-            productImage: datenow + '-' + productImage.originalname,
-            productGallery: datenow + '-' + productGallery.originalname,
-            product3dFile: datenow + '-' + product3dFile.originalname,
+            productImage: productImage,
+            productGallery: reqFiles,
+            product3dFile: product3dFile,
             status: req.body.status,
             addedBy: req.body.addedBy, 
             addedDate: req.body.addedDate,
