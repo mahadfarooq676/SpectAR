@@ -10,7 +10,8 @@ const storage = multer.diskStorage({
         cb(null, "client/public/uploads/");
     },
     filename: (req, file, cb) => {
-        cb(null, datenow + '-' + file.originalname );
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, datenow + '-' + fileName)
     }
 });
 
@@ -21,7 +22,7 @@ const upload = multer({ storage: storage });
 // @desc Add Product 
 // @access Public
 // router.post('/', upload.single("productImage"), async (req,res) => {
-router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'product3dFile', maxCount: 1 },{ name: 'productGallery', maxCount: 20 }]), async (req,res) => {
+router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'product3dFile', maxCount: 1 },{ name: 'productGallery', maxCount: 6 }]), async (req,res) => {
     // const url = req.protocol + '://' + req.get('host')
 
     // const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, 
