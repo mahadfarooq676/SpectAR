@@ -15,20 +15,19 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+var upload = multer({
+    storage: storage
+});
 
 
 // @route POST api/product
 // @desc Add Product 
 // @access Public
 // router.post('/', upload.single("productImage"), async (req,res) => {
-router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'product3dFile', maxCount: 1 },{ name: 'productGallery', maxCount: 6 }]), async (req,res) => {
-    // const url = req.protocol + '://' + req.get('host')
-
-    // const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, 
-    //     lensWidth, lensHeight, templeLength, bridgeWidth, status, addedBy, addedDate } = req.body;
     
-    // const { productImage }= url + '/images/' + req.file.filename;
+    // router.post('/',  upload.array('productGallery', 6), (req,res) => {
+    router.post('/',  upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }]), (req,res) => {
+    
     const productImage = req.files.productImage[0].filename;
     const product3dFile = req.files.product3dFile[0].filename;
     const reqFiles = [];
@@ -62,8 +61,8 @@ router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'p
             addedBy: req.body.addedBy, 
             addedDate: req.body.addedDate,
         });
-
-        await product.save();
+        
+        product.save();
         return res.status(200).json([{ msg: 'Product added successfully' }] );
     
     }catch(err){
