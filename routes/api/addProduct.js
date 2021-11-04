@@ -7,33 +7,30 @@ const datenow = Date.now();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "../../https://spectar-app.herokuapp.com/public/uploads/");
+        cb(null, "client/public/uploads/");
     },
     filename: (req, file, cb) => {
-        const fileName = file.originalname.toLowerCase().split(' ').join('-');
-        cb(null, datenow + '-' + fileName)
+        cb(null, datenow + '-' + file.originalname );
     }
 });
 
-var upload = multer({
-    storage: storage
-});
+const upload = multer({ storage: storage });
 
 
 // @route POST api/product
 // @desc Add Product 
 // @access Public
 // router.post('/', upload.single("productImage"), async (req,res) => {
+router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'product3dFile', maxCount: 1 },{ name: 'productGallery', maxCount: 20 }]), async (req,res) => {
+    // const url = req.protocol + '://' + req.get('host')
+
+    // const { productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, 
+    //     lensWidth, lensHeight, templeLength, bridgeWidth, status, addedBy, addedDate } = req.body;
     
-    // router.post('/',  upload.array('productGallery', 6), (req,res) => {
-    router.post('/',  upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }]), (req,res) => {
-    
-    const productImage = req.files.productImage[0].filename;
-    const product3dFile = req.files.product3dFile[0].filename;
-    const reqFiles = [];
-    for (var i = 0; i < req.files.productGallery.length; i++) {
-        reqFiles.push(req.files.productGallery[i].filename)
-    }
+    // const { productImage }= url + '/images/' + req.file.filename;
+    const productImage = req.files.productImage[0];
+    const product3dFile = req.files.product3dFile[0];
+    const productGallery = req.files.product3dFile;
     try{
 
       const product = new Product({
@@ -54,15 +51,15 @@ var upload = multer({
             lensHeight: req.body.lensHeight,
             templeLength: req.body.templeLength,
             bridgeWidth: req.body.bridgeWidth,
-            productImage: productImage,
-            productGallery: reqFiles,
-            product3dFile: product3dFile,
+            productImage: datenow + '-' + productImage.originalname,
+            productGallery: datenow + '-' + productGallery.originalname,
+            product3dFile: datenow + '-' + product3dFile.originalname,
             status: req.body.status,
             addedBy: req.body.addedBy, 
             addedDate: req.body.addedDate,
         });
-        
-        product.save();
+
+        await product.save();
         return res.status(200).json([{ msg: 'Product added successfully' }] );
     
     }catch(err){
