@@ -26,6 +26,18 @@ export const getAllProducts = () => async dispatch => {
 }
 
 
+// GET All Banners
+export const getAllBanners = () => async dispatch => {
+
+    const res = await axios.get(URL + 'api/getProductData');
+
+    dispatch({
+        type: GET_PRODUCT_DATA,
+        payload: res.data 
+    });
+}
+
+
 // GET Product By Id
 export const getProduct = (_id) => async dispatch => {
     try{

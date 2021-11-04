@@ -71,16 +71,13 @@ const product = new mongoose.Schema({
         required: true
     },
     productImage: {
-        type: String,
-        required: true
+        type: String
     },
     productGallery: {
-        type: Array,
-        required: true
+        type: Array
     },
     product3dFile: {
-        type: String,
-        required: true
+        type: String
     },
     status: {
         type: String,

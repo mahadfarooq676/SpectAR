@@ -58,7 +58,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
     }
 
     const galleryUpload = (event) => {
-      setInputField({ ...inputField, productgallery: event.target.files});
+      setInputField({ ...inputField, productGallery: event.target.files});
     }
 
     const File3dUpload = (event) => {
@@ -71,9 +71,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
   
     const onSubmit = async e => {
         e.preventDefault();
-        if( !inputField.productName || !inputField.productPrice || !inputField.sku || !inputField.productCategory || !inputField.productQuantity|| !inputField.shortDescription || !inputField.detailedDescription || !inputField.materialType || !inputField.frameLength ||
-          !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || 
-          !inputField.bridgeWidth || inputField.productImage.length <= 0 || inputField.product3dFile.length <= 0 || !inputField.status ){
+        if( !inputField.productName || !inputField.productPrice || !inputField.sku || !inputField.productCategory || !inputField.productQuantity|| !inputField.shortDescription || !inputField.detailedDescription || !inputField.materialType || !inputField.frameLength || !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || !inputField.bridgeWidth || !inputField.productGallery || !inputField.status ){
           setAlert('All fiels are required','danger');
       }else if(!inputField.brandName){
         setInputField({ ...inputField, brandName: 'No Brand'})
@@ -87,8 +85,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
         formdata.append('productImage', inputField.productImage, inputField.productImage.name);
         for (const key of Object.keys(inputField.productGallery)) {
           formdata.append('productGallery', inputField.productGallery[key])
-        }
-        // formdata.append('productGallery', inputField.productGallery, inputField.productGallery.name);
+      }
         formdata.append('product3dFile', inputField.product3dFile, inputField.product3dFile.name);
         formdata.append('productName', inputField.productName);
         formdata.append('brandName', inputField.brandName);
@@ -228,8 +225,8 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                     <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Thumbnail" />
                   </Form.Group>
                   <Form.Group>
-                    <label htmlFor="productGallary">Product Gallery Images</label>
-                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productGallary" className="form-control" onChange={galleryUpload} placeholder="Enter Gallery Images" />
+                    <label htmlFor="productGallery">Product Gallery Images</label>
+                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productGallary" className="form-control" onChange={galleryUpload} placeholder="Enter Gallery Images" />                  
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="product3dFile">Product 3d File </label>

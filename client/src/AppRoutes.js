@@ -13,6 +13,8 @@ import updateProduct from "./components/updateProduct";
 import viewProduct from "./components/viewProduct";
 import manageOrders from "./components/manageOrders";
 import manageAdmins from "./components/manageAdmins";
+import AddBanner from "./components/addBanner";
+import manageBanners from "./components/manageBanner";
 import addAdmin from "./components/addAdmin";
 import Navbar from './components/shared/Navbar';
 import Sidebar from './components/shared/Sidebar';
@@ -21,6 +23,7 @@ import SettingsPanel from './components/shared/SettingsPanel';
 import Spinner from './components/shared/Spinner';
 import App from './App';
 import PrivateRoute from './components/routing/privateRoute';
+import addBanner from './components/addBanner';
 
 class AppRoutes extends Component {
   render () {
@@ -43,7 +46,9 @@ class AppRoutes extends Component {
                       <PrivateRoute path='/AppRoutes/updateProduct' component={updateProduct} />
                       <PrivateRoute path='/AppRoutes/viewProduct' component={viewProduct} />
                       <PrivateRoute path='/AppRoutes/manageOrders' component={manageOrders} />
+                      <PrivateRoute path='/AppRoutes/addBanner' component={addBanner} />
                       <PrivateRoute path='/AppRoutes/manageAdmins' component={manageAdmins} />
+                      <PrivateRoute path='/AppRoutes/manageBanner' component={manageBanners} />
                       <PrivateRoute path='/AppRoutes/addAdmin' component={addAdmin} />
                     </Switch>
                   </Suspense>

@@ -64,6 +64,12 @@ class Sidebar extends Component {
               <i className="mdi mdi-account menu-icon"></i>
             </Link>
           </li>
+          <li className={ this.isPathActive('/AppRoutes/manageBanner') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/AppRoutes/manageBanner">
+              <span className="menu-title"><Trans>Manage Banners</Trans></span>
+              <i className="mdi mdi-account menu-icon"></i>
+            </Link>
+          </li>
         </ul>
       </nav>
     );

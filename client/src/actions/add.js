@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { ADD_PRODUCT, UPDATE_PRODUCT, URL } from './types';
+import { ADD_PRODUCT, UPDATE_PRODUCT, ADD_BANNER, URL } from './types';
 
 
 
@@ -63,3 +63,32 @@ export const updateProduct = ({ productId, productName, productPrice, productCat
     }
 }
 
+//Add Banner
+export const addBanner = (formData, history) => async dispatch => {
+    const config = {
+        headers: {
+            'content-Type': 'application/json',
+        }
+    }
+
+     const body = { formData };
+
+    try{
+        const res = await axios.post(URL + 'api/addBanner', formData);
+
+        dispatch({
+            type: ADD_BANNER,
+            payload: res.data
+        });
+        dispatch(setAlert('New Banner Added Successfully', 'success'));
+        history.push('/AppRoutes/manageBanner');
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }    
+
+    }
+}
