@@ -16,7 +16,7 @@ app.use(express.json({ extended: false }));
 app.use('/public', express.static('client/public'));
 
 app.use('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://spectar-app.herokuapp.com/");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Credentials', true);
@@ -34,12 +34,14 @@ app.use('/api/getAdminData', require('./routes/api/getAdminData'));
 app.use('/api/getProductData', require('./routes/api/getProductData'));
 app.use('/api/getProduct', require('./routes/api/getProductById'));
 app.use('/api/getCategories', require('./routes/api/getCategories'));
+app.use('/api/getBanners', require('./routes/api/getBanners'));
 app.use('/api/userSignup', require('./routes/AppApi/userSignup'));
 app.use('/api/userLogin', require('./routes/AppApi/userLogin'));
 app.use('/api/getProducts', require('./routes/AppApi/getProducts'));
 app.use('/api/addProduct', require('./routes/api/addProduct'));
 app.use('/api/updateProduct', require('./routes/api/updateProduct'));
 app.use('/api/addBanner', require('./routes/api/addBanner'));
+app.use('/api/getBanner', require('./routes/AppApi/getBanners'));
 
 
 app.use(express.static(path.join(__dirname, 'build')));

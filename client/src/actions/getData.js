@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_ADMIN_DATA, GET_PRODUCT_DATA, GET_PRODUCT_BY_ID, GET_CATEGORIES, GET_DATA_ERROR, URL } from './types';
+import { GET_ADMIN_DATA, GET_PRODUCT_DATA, GET_PRODUCT_BY_ID, GET_CATEGORIES, GET_DATA_ERROR, URL, GET_BANNERS } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 // GET All Admins
@@ -16,18 +16,6 @@ export const getAllAdmins = () => async dispatch => {
 
 // GET All Products
 export const getAllProducts = () => async dispatch => {
-
-    const res = await axios.get(URL + 'api/getProductData');
-
-    dispatch({
-        type: GET_PRODUCT_DATA,
-        payload: res.data 
-    });
-}
-
-
-// GET All Banners
-export const getAllBanners = () => async dispatch => {
 
     const res = await axios.get(URL + 'api/getProductData');
 
@@ -69,6 +57,17 @@ export const getCategories = () => async dispatch => {
 
     dispatch({
         type: GET_CATEGORIES,
+        payload: res.data 
+    });
+}
+
+// GET_BANNERS
+export const getBanners = () => async dispatch => {
+
+    const res = await axios.get(URL + 'api/getBanners');
+
+    dispatch({
+        type: GET_BANNERS,
         payload: res.data 
     });
 }

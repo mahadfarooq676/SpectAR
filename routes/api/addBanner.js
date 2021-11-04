@@ -30,14 +30,11 @@ var upload = multer({
 // User model
 let Banner = require('../../models/model_banner');
 
-router.post('/', upload.array('productGallery', 6), (req, res, next) => {
-    const reqFiles = [];
-    for (var i = 0; i < req.files.length; i++) {
-        reqFiles.push(req.files[i].filename)
-    }
+router.post('/', upload.single("bannerImage"), (req, res, next) => {
+    const bannerImage = req.file.filename;
 try{
     const banner = new Banner({
-        productGallery: reqFiles,
+        bannerImage: bannerImage,
         bannerName: req.body.bannerName
     });
 

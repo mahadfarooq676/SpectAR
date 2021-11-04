@@ -17,7 +17,7 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
 
       const [inputField, setInputField] = useState({
         bannerName: '',
-        productGallery: ''
+        bannerImage: ''
     });
 
      let addedBy = admin && admin.name;
@@ -35,20 +35,18 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
         setInputField({ ...inputField, [e.target.name]: e.target.value});
 
     const galleryUpload = (event) => {
-      setInputField({ ...inputField, productGallery: event.target.files});
+      setInputField({ ...inputField, bannerImage: event.target.files[0]});
     }
 
     
   
     const onSubmit = async e => {
         e.preventDefault();
-        if( !inputField.bannerName || !inputField.productGallery){
+        if( !inputField.bannerName || !inputField.bannerImage){
           setAlert('All fiels are required','danger');
       }else{
         const formData = new FormData();
-        for (const key of Object.keys(inputField.productGallery)) {
-            formData.append('productGallery', inputField.productGallery[key])
-        }
+        formData.append('bannerImage', inputField.bannerImage, inputField.bannerImage.name);
         formData.append('bannerName', inputField.bannerName);
 
         addBanner(formData, history);
@@ -63,12 +61,12 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
                 <p className="card-description">  </p>
                 <form className="forms-sample" onSubmit={e => onSubmit(e)} encType='multipart/form-data' >
                   <Form.Group>
-                    <label htmlFor="productName">Title</label>
+                    <label htmlFor="bannerName">Title</label>
                     <Form.Control type="text" name="bannerName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Title" />
                   </Form.Group>
                   <Form.Group>
-                    <label htmlFor="productGallary">Banner Images</label>
-                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productGallary" className="form-control" onChange={galleryUpload} placeholder="Enter Gallery Images" />
+                    <label htmlFor="bannerImage">Banner Images</label>
+                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="bannerImage" className="form-control" onChange={galleryUpload} placeholder="Enter Banner Image" />
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
                   <Link to="/AppRoutes/manageBanner" className="btn btn-light">Cancel</Link>

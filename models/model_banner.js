@@ -6,8 +6,9 @@ const banner = new mongoose.Schema({
         type: String,
         required: true
     },
-    productGallery: {
-        type: Array
+    bannerImage: {
+        type: String,
+        required: true
     }
 })
 const Banner = mongoose.model('Banner',banner);
