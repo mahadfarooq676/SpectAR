@@ -16,5 +16,5 @@ export const GET_PRODUCT_Failed = 'GET_PRODUCT_Failed';
 export const ADD_BANNER = 'ADD_BANNER';
 export const GET_BANNERS = 'GET_BANNERS';
 export const LOGOUT = 'LOGOUT';
-// export const URL = 'https://spectar-app.herokuapp.com/';
-export const URL = 'http://localhost:5000/';
+export const URL = 'https://spectar-app.herokuapp.com/';
+// export const URL = 'http://localhost:5000/';
