@@ -28,9 +28,9 @@ router.post('/', upload.fields([{ name: 'productImage', maxCount: 1 },{ name: 'p
     //     lensWidth, lensHeight, templeLength, bridgeWidth, status, addedBy, addedDate } = req.body;
     
     // const { productImage }= url + '/images/' + req.file.filename;
-    const productImage = "req.files.productImage[0].filename";
-    const product3dFile = "req.files.product3dFile[0].filename";
-    const reqFiles = ["sdf","ssdf"];
+    const productImage = req.files.productImage[0].filename;
+    const product3dFile = req.files.product3dFile[0].filename;
+    const reqFiles = [];
     for (var i = 0; i < req.files.productGallery.length; i++) {
         reqFiles.push(req.files.productGallery[i].filename)
     }
