@@ -1,16 +1,17 @@
-import React, { Fragment, useEffect} from 'react';
+import React, { Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect  } from 'react-router-dom'
-import { history } from 'react-router'
+import { Link  } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getBanners } from '../actions/getData';
 import Spinner from './layout/spinner';
-import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { URL } from './../actions/types';
 
 
 const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) => {
+
+  const [ searchTerm, setSerachTerm ] = useState("");
+
     useEffect(() => {
         getBanners();
     }, []);
@@ -38,6 +39,18 @@ const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) =>
             <div className="card">
               <div className="card-body">
                 <h4 className="card-title">Banner</h4>
+                <div className="search-field d-none d-md-block mt-4 mb-4">
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <i className="input-group-text border-0 mdi mdi-magnify text-gradient-primary bg-gradient-primary"></i>
+                      </div>
+                      <input type="text" className="form-control bg-light border-1 text-dark" placeholder="Search..."
+                      onChange={(e) => {
+                        setSerachTerm(e.target.value);
+                      }}
+                      />
+                    </div>
+                </div>
                 <div className="table-responsive">
                   <table className="table">
                     <thead>
@@ -50,10 +63,16 @@ const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) =>
                     <tbody>
                     
                         {banners.length > 0 ? (
-                            banners.map(b => (
+                            banners.filter((banner) => {
+                              if(searchTerm == ""){
+                                return banner
+                              } else if(banner.bannerName.toLowerCase().includes(searchTerm.toLowerCase())){
+                                return banner
+                              }
+                            }).map(banner => (
                               <tr>
-                              <img src={URL+"public/banner/"+b.bannerImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
-                              <td>{b.bannerName}</td>
+                              <img src={URL+"public/banner/"+banner.bannerImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
+                              <td>{banner.bannerName}</td>
                               <td><Link className="btn btn-sm btn-gradient-danger mr-2"  ><i className="mdi mdi-delete"></i></Link></td>
                             </tr>
                             ))

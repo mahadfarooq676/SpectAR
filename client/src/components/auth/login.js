@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { Form } from 'react-bootstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
-import { set } from "mongoose";
-// import { Alert } from "bootstrap";
 import Alert from '../layout/Alert';
 
 

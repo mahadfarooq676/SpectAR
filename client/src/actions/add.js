@@ -1,19 +1,11 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { ADD_PRODUCT, UPDATE_PRODUCT, ADD_BANNER, URL } from './types';
+import { ADD_PRODUCT, UPDATE_PRODUCT, ADD_BANNER, UPDATE_ADMIN, URL } from './types';
 
 
 
 //Add Product
 export const addProduct = (formdata, history) => async dispatch => {
-    const config = {
-        headers: {
-            'content-Type': 'application/json',
-        }
-    }
-
-     const body = { formdata };
-
     try{
         const res = await axios.post(URL + 'api/addProduct', formdata);
 
@@ -62,6 +54,37 @@ export const updateProduct = ({ productId, productName, productPrice, productCat
 
     }
 }
+
+
+//Update Admin
+export const updateAdmin = ({ adminId, name, email, password, role, addedBy, addedDate, status }, history) => async dispatch => {
+    const config = {
+        headers: {
+            'content-Type': 'application/json',
+        }
+    }
+
+    const body = JSON.stringify({ adminId, name, email, password, role, addedBy, addedDate, status });
+
+    try{
+        const res = await axios.put(URL + 'api/updateAdmin', body, config);
+
+        dispatch({
+            type: UPDATE_ADMIN,
+            payload: res.data
+        });
+        dispatch(setAlert('Admin Updated Successfully', 'success'));
+        history.push('/AppRoutes/manageAdmins');
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }    
+
+    }
+}
+
 
 //Add Banner
 export const addBanner = (formData, history) => async dispatch => {

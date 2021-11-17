@@ -13,7 +13,8 @@ const AddAdmin = ({ auth: { admin },setAlert, register , history }) => {
       name: '',
       email:  '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      role: ''
   });
    let addedBy = admin && admin.name;
    var addedDate = new Date();
@@ -22,8 +23,8 @@ var mm = String(addedDate.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = addedDate.getFullYear();
 
 addedDate = mm + '/' + dd + '/' + yyyy;
-var deleteStatus = 0;
-  const { name, email, password, confirmPassword } = formData;
+var status = "Active";
+  const { name, email, password, confirmPassword, role } = formData;
 
   const onChange = e => 
       setFormData({ ...formData, [e.target.name]: e.target.value});
@@ -33,7 +34,7 @@ var deleteStatus = 0;
       if(password !== confirmPassword){
           setAlert('Password do not match','danger');
       }else{
-        register({ name, email, password, addedBy, addedDate, deleteStatus }, history);
+        register({ name, email, password, role, addedBy, addedDate, status }, history);
       }
   };
 
@@ -59,6 +60,14 @@ var deleteStatus = 0;
                   <Form.Group>
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <Form.Control type="password" name="confirmPassword" className="form-control" onChange={e => onChange(e)} placeholder="Enter Confirm Password" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="role">Role</label>
+                    <select className="form-control" name="role" onChange={e => onChange(e)}>
+                      <option selected disabled>Select Role</option>
+                      <option value="Admin">Admin</option>
+                      <option value="Moderator">Moderator</option>
+                    </select>
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
                   <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>

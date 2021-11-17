@@ -13,9 +13,9 @@ import updateProduct from "./components/updateProduct";
 import viewProduct from "./components/viewProduct";
 import manageOrders from "./components/manageOrders";
 import manageAdmins from "./components/manageAdmins";
-import AddBanner from "./components/addBanner";
 import manageBanners from "./components/manageBanner";
 import addAdmin from "./components/addAdmin";
+import updateAdmin from "./components/updateAdmin";
 import Navbar from './components/shared/Navbar';
 import Sidebar from './components/shared/Sidebar';
 import Footer from './components/shared/Footer';
@@ -50,6 +50,7 @@ class AppRoutes extends Component {
                       <PrivateRoute path='/AppRoutes/manageAdmins' component={manageAdmins} />
                       <PrivateRoute path='/AppRoutes/manageBanner' component={manageBanners} />
                       <PrivateRoute path='/AppRoutes/addAdmin' component={addAdmin} />
+                      <PrivateRoute path='/AppRoutes/updateAdmin' component={updateAdmin} />
                     </Switch>
                   </Suspense>
                 < SettingsPanel />

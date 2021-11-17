@@ -12,6 +12,7 @@ const Admin = require('../../models/model_admin');
 router.post('/',[
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please enter valid email').isEmail(),
+    check('role', 'Role is required').not().isEmpty(),
     check('password', 'Password should be6 or more characters').isLength({ min:6 })
 ],async (req,res) => {
     const errors = validationResult(req);
@@ -19,7 +20,7 @@ router.post('/',[
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const { name, email, password, addedBy, addedDate, deleteStatus } = req.body;
+    const { name, email, password, role, addedBy, addedDate, status } = req.body;
 
     try{
         
@@ -33,9 +34,10 @@ router.post('/',[
             name,
             email,
             password,
+            role,
             addedBy,
             addedDate,
-            deleteStatus
+            status
         });
 
         const salt = await bcrypt.genSalt(10);

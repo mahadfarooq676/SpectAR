@@ -19,6 +19,7 @@ export default function(state = initialState, action) {
 
     switch(type){
         case USER_LOADED:
+            localStorage.setItem('role', payload.role);
             return{
                 ...state,
                 isAuthenticated: true,
@@ -39,6 +40,8 @@ export default function(state = initialState, action) {
         case AUTH_ERROR:
         case LOGOUT: 
             localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('_id');
             return{
                 ...state,
                 token: null,

@@ -3,15 +3,13 @@ const router = express.Router();
 const Product = require('../../models/model_product'); 
 const multer = require('multer');
 
-const datenow = Date.now();
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "client/public/uploads/");
     },
     filename: (req, file, cb) => {
         const fileName = file.originalname.toLowerCase().split(' ').join('-');
-        cb(null, datenow + '-' + fileName)
+        cb(null, Date.now() + '-' + fileName)
     }
 });
 

@@ -26,12 +26,59 @@ class Sidebar extends Component {
     Object.keys(this.state).forEach(i => {
       this.setState({[i]: false});
     });
-
-
- 
   }
 
+
   render () {
+
+     let role = "Admin"
+
+
+    if(role == "Admin"){
+      return (
+      <nav className="sidebar sidebar-offcanvas" id="sidebar">
+        <ul className="nav">
+          <li className="nav-item nav-profile">
+            <a href="!#" className="nav-link" onClick={evt =>evt.preventDefault()}>
+              
+            </a>
+          </li>
+          <li className={ this.isPathActive('/AppRoutes/dashboard') ? 'nav-item active' : 'nav-item' } onClick={ () => this.toggleMenuState('dashboard') } data-toggle="collapse">
+            <Collapse in={ this.state.formElementsMenuOpen }>
+            <Link className="nav-link" to="/AppRoutes/dashboard">
+              <span className="menu-title"><Trans>Dashboard</Trans></span>
+              <i className="mdi mdi-home menu-icon"></i>
+            </Link>
+            </Collapse>
+          </li>
+          <li className={ this.isPathActive('/AppRoutes/manageProduct') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/AppRoutes/manageProduct">
+              <span className="menu-title"><Trans>Manage Product</Trans></span>
+              <i className="mdi mdi-buffer menu-icon"></i>
+            </Link>
+          </li>
+          <li className={ this.isPathActive('/AppRoutes/manageOrders') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/AppRoutes/manageOrders">
+              <span className="menu-title"><Trans>Manage Orders</Trans></span>
+              <i className="mdi mdi-briefcase-check menu-icon"></i>
+            </Link>
+          </li>
+          <li className={ this.isPathActive('/AppRoutes/manageAdmins') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/AppRoutes/manageAdmins">
+              <span className="menu-title"><Trans>Manage Admins</Trans></span>
+              <i className="mdi mdi-account menu-icon"></i>
+            </Link>
+          </li>
+          <li className={ this.isPathActive('/AppRoutes/manageBanner') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/AppRoutes/manageBanner">
+              <span className="menu-title"><Trans>Manage Banners</Trans></span>
+              <i className="mdi mdi-view-grid menu-icon"></i>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    )
+  }else if(role == "Moderator"){
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
@@ -58,21 +105,18 @@ class Sidebar extends Component {
               <i className="mdi mdi-briefcase-check menu-icon"></i>
             </Link>
           </li>
-          <li className={ this.isPathActive('/AppRoutes/manageAdmins') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/AppRoutes/manageAdmins">
-              <span className="menu-title"><Trans>Manage Admins</Trans></span>
-              <i className="mdi mdi-account menu-icon"></i>
-            </Link>
-          </li>
-          <li className={ this.isPathActive('/AppRoutes/manageBanner') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="/AppRoutes/manageBanner">
-              <span className="menu-title"><Trans>Manage Banners</Trans></span>
-              <i className="mdi mdi-account menu-icon"></i>
-            </Link>
-          </li>
         </ul>
       </nav>
-    );
+    )
+    }else{
+      return (
+        <nav className="sidebar sidebar-offcanvas" id="sidebar">
+          <ul className="nav">
+            
+          </ul>
+        </nav>
+      )
+    }
   }
 
   isPathActive(path) {

@@ -8,6 +8,7 @@ import { logout } from '../../actions/auth'
 
 const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
 
+
   const toggleOffcanvas = () => {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
   }
@@ -22,16 +23,6 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
           <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick={ () => document.body.classList.toggle('sidebar-icon-only') }>
             <span className="mdi mdi-menu"></span>
           </button>
-          <div className="search-field d-none d-md-block">
-            <form className="d-flex align-items-center h-100" action="#">
-              <div className="input-group">
-                <div className="input-group-prepend bg-transparent">
-                  <i className="input-group-text border-0 mdi mdi-magnify"></i>
-                </div>
-                <input type="text" className="form-control bg-transparent border-0" placeholder="Search "/>
-              </div>
-            </form>
-          </div>
           <ul className="navbar-nav navbar-nav-right">
             <li className="nav-item nav-profile">
               <Dropdown alignRight>
@@ -40,8 +31,8 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
                     <img src={require("../../assets/images/faces/face1.jpg").default} alt="user"/>
                     <span className="availability-status online"></span>
                   </div>
-                  <div className="nav-profile-text">
-                    <p className="mb-1 text-black"><Trans>{admin && admin.name}</Trans></p>
+                  <div className="ml-3">
+                    <p className="mb-0 text-black"><Trans>{admin && admin.name}</Trans></p>
                   </div>
                 </Dropdown.Toggle>
               </Dropdown>

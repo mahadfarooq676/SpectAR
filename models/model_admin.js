@@ -13,14 +13,21 @@ const admin = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },addedBy: {
+    },
+    role: {
         type: String,
         required: true
-    },addedDate: {
+    },
+    addedBy: {
         type: String,
         required: true
-    },deleteStatus: {
-        type: Number,
+    },
+    addedDate: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
         required: true
     }
     

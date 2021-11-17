@@ -110,11 +110,11 @@
       &.active {
         .nav-link {
           .menu-title {
-            color: $sidebar-light-menu-active-color;
-            font-weight: $font-weight-medium;         
+            color: #ff2768;
+            font-weight: $font-weight-bold;         
           }
           i {
-            color: theme-color(primary);
+            color: #ff2768;
           }
         }
       }

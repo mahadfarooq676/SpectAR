@@ -29,6 +29,9 @@ app.use('*', function(req, res, next) {
 // app.get('/', (res,req) => res.send('API RUNNING'));
 
 app.use('/api/admin', require('./routes/api/admin'));
+app.use('/api/getAdmin', require('./routes/api/getAdminById'));
+app.use('/api/updateAdmin', require('./routes/api/updateAdmin'));
+app.use('/api/deleteAdmin', require('./routes/api/deleteAdmin'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/getAdminData', require('./routes/api/getAdminData'));
 app.use('/api/getProductData', require('./routes/api/getProductData'));
@@ -40,6 +43,7 @@ app.use('/api/userLogin', require('./routes/AppApi/userLogin'));
 app.use('/api/getProducts', require('./routes/AppApi/getProducts'));
 app.use('/api/addProduct', require('./routes/api/addProduct'));
 app.use('/api/updateProduct', require('./routes/api/updateProduct'));
+app.use('/api/deleteProduct', require('./routes/api/deleteProduct'));
 app.use('/api/addBanner', require('./routes/api/addBanner'));
 app.use('/api/getBanner', require('./routes/AppApi/getBanners'));
 
