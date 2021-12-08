@@ -4,7 +4,9 @@ import {
     GET_DATA_ERROR,
     GET_PRODUCT_BY_ID,
     GET_CATEGORIES,
-    GET_BANNERS
+    GET_BANNERS,
+    GET_ORDERS,
+    GET_ORDER_BY_ID
 } from '../actions/types';
 
 const initialState = {
@@ -12,7 +14,9 @@ const initialState = {
     products: [],
     categories: [],
     banners: [],
+    orders: [],
     productById: null,
+    orderById: null,
     loading: true,
     error: {}
 }
@@ -52,6 +56,18 @@ export default function(state = initialState, action) {
         return{
             ...state,
             banners: payload,
+            loading: false
+        };
+        case GET_ORDERS:
+        return{
+            ...state,
+            orders: payload,
+            loading: false
+        };
+        case GET_ORDER_BY_ID:
+        return{
+            ...state,
+            orderById: payload,
             loading: false
         };
         case GET_DATA_ERROR:

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_ADMIN_DATA, GET_PRODUCT_DATA, GET_PRODUCT_BY_ID, GET_CATEGORIES, GET_DATA_ERROR, URL, GET_BANNERS } from './types';
+import { GET_ADMIN_DATA, GET_PRODUCT_DATA, GET_PRODUCT_BY_ID, GET_CATEGORIES, GET_DATA_ERROR, URL, GET_BANNERS, GET_ORDERS, GET_ORDER_BY_ID } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 // GET All Admins
@@ -70,4 +70,40 @@ export const getBanners = () => async dispatch => {
         type: GET_BANNERS,
         payload: res.data 
     });
+}
+
+// GET_ORDERS
+export const getOrders = () => async dispatch => {
+
+    const res = await axios.get(URL + 'api/getOrders');
+
+    dispatch({
+        type: GET_ORDERS,
+        payload: res.data 
+    });
+}
+
+
+// GET Order By Id
+export const getOrder = (_id) => async dispatch => {
+    try{
+    const config = {
+        headers: {
+            'content-Type': 'application/json'
+        }
+    };
+
+    const body = JSON.stringify({ _id });
+
+    const res = await axios.get(URL + 'api/getOrder/'+_id);
+
+    dispatch({
+        type: GET_ORDER_BY_ID,
+        payload: res.data 
+    });
+    }catch{
+        dispatch({
+            type: GET_DATA_ERROR
+        });
+    }
 }

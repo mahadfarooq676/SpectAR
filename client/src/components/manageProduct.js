@@ -30,7 +30,7 @@ const ManageProducts = ({ getAllProducts, deleteProduct, getData: { products, lo
       history.push("/appRoutes/updateProduct")
     }
 
-    const deleteProductt = async (_id, products) => {
+    const deleteProductt = async (_id) => {
       confirmAlert({
         title: 'Confirm to delete',
         message: 'Are you sure to do this.',

@@ -75,8 +75,8 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
           setAlert('All fiels are required','danger');
       }else if(!inputField.brandName){
         setInputField({ ...inputField, brandName: 'No Brand'})
-      }else if(!inputField.salesPrice){
-        setInputField({ ...inputField, salesPrice: '0'})
+      }else if(inputField.salesPrice == 0){
+        setInputField({ ...inputField, salesPrice: inputField.productPrice })
       }else if(!inputField.highlights){
         setInputField({ ...inputField, highlights: 'No Highlights'})
       }else{

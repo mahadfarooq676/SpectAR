@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.35b78bd7.chunk.css",
-    "main.js": "/static/js/main.1885e4f3.chunk.js",
-    "main.js.map": "/static/js/main.1885e4f3.chunk.js.map",
+    "main.css": "/static/css/main.dca1043c.chunk.css",
+    "main.js": "/static/js/main.e5cf6d3a.chunk.js",
+    "main.js.map": "/static/js/main.e5cf6d3a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0367f21a.js",
     "runtime-main.js.map": "/static/js/runtime-main.0367f21a.js.map",
     "static/css/2.f42b5ed3.chunk.css": "/static/css/2.f42b5ed3.chunk.css",
-    "static/js/2.b565abff.chunk.js": "/static/js/2.b565abff.chunk.js",
-    "static/js/2.b565abff.chunk.js.map": "/static/js/2.b565abff.chunk.js.map",
+    "static/js/2.76dc1b30.chunk.js": "/static/js/2.76dc1b30.chunk.js",
+    "static/js/2.76dc1b30.chunk.js.map": "/static/js/2.76dc1b30.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.f42b5ed3.chunk.css.map": "/static/css/2.f42b5ed3.chunk.css.map",
-    "static/css/main.35b78bd7.chunk.css.map": "/static/css/main.35b78bd7.chunk.css.map",
-    "static/js/2.b565abff.chunk.js.LICENSE.txt": "/static/js/2.b565abff.chunk.js.LICENSE.txt",
+    "static/css/main.dca1043c.chunk.css.map": "/static/css/main.dca1043c.chunk.css.map",
+    "static/js/2.76dc1b30.chunk.js.LICENSE.txt": "/static/js/2.76dc1b30.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/static/media/weather.bc7a5081.svg",
     "static/media/SpectARLogo.png": "/static/media/SpectARLogo.074a3fdb.png",
     "static/media/SpectARLogoSm.png": "/static/media/SpectARLogoSm.3cd44482.png",
@@ -22,17 +22,13 @@
     "static/media/face4.jpg": "/static/media/face4.ade8a387.jpg",
     "static/media/face5.jpg": "/static/media/face5.ce964104.jpg",
     "static/media/face6.jpg": "/static/media/face6.164f9103.jpg",
-    "static/media/product1.jpg": "/static/media/product1.cb80ad78.jpg",
-    "static/media/product2.jpg": "/static/media/product2.1fd01e11.jpg",
-    "static/media/product5.jpg": "/static/media/product5.25736986.jpg",
-    "static/media/product6.jpg": "/static/media/product6.ade537aa.jpg",
     "static/media/spinner.7f686c03.gif": "/static/media/spinner.7f686c03.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.0367f21a.js",
     "static/css/2.f42b5ed3.chunk.css",
-    "static/js/2.b565abff.chunk.js",
-    "static/css/main.35b78bd7.chunk.css",
-    "static/js/main.1885e4f3.chunk.js"
+    "static/js/2.76dc1b30.chunk.js",
+    "static/css/main.dca1043c.chunk.css",
+    "static/js/main.e5cf6d3a.chunk.js"
   ]
 }

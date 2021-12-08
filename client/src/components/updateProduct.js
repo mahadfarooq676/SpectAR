@@ -19,19 +19,27 @@ const UpdateProduct = ({ auth: { admin }, setAlert, getCategories, updateProduct
 
 
   const [formData, setFormData] = useState({
-    productId: '',
-    productName: '',
-    productPrice:  '',
-    productCategory: '',
-    productQuantity: '',
-    frameLength:  '',
-    frameWeight: '',
-    lensWidth: '',
-    lensHeight: '',
-    templeLength:  '',
-    bridgeWidth: '',
-    productImage: '',
-    status: ''
+      productName: '',
+      brandName: 'No Brand',
+      productPrice:  '',
+      salesPrice: '0',
+      sku: '',
+      productCategory: '',
+      productQuantity: '',
+      shortDescription: '',
+      highlights: 'No Highlights',
+      detailedDescription: '',
+      materialType: '',
+      frameLength:  '',
+      frameWeight: '',
+      lensWidth: '',
+      lensHeight: '',
+      templeLength:  '',
+      bridgeWidth: '',
+      productImage: '',
+      productGallery: '',
+      product3dFile: '',
+      status: ''
   });
    let addedBy = admin && admin.name;
    var addedDate = new Date();
@@ -51,9 +59,16 @@ useEffect(async () => {
 useEffect(() => {
   setFormData({
     productName: !product.productName ? '' : product.productName,
+    brandName: !product.brandName ? '' : product.brandName,
     productPrice: !product.productPrice ? '' : product.productPrice,
+    salesPrice: !product.salesPrice ? '' : product.salesPrice,
+    sku: !product.sku ? '' : product.sku,
     productCategory: !product.productCategory ? '' : product.productCategory,
     productQuantity: !product.productQuantity ? '' : product.productQuantity,
+    shortDescription: !product.shortDescription ? '' : product.shortDescription,
+    highlights: !product.highlights ? '' : product.highlights,
+    detailedDescription: !product.detailedDescription ? '' : product.detailedDescription,
+    materialType: !product.materialType ? '' : product.materialType,
     frameLength: !product.frameLength ? '' : product.frameLength,
     frameWeight: !product.frameWeight ? '' : product.frameWeight,
     lensWidth: !product.lensWidth ? '' : product.lensWidth,
@@ -66,7 +81,8 @@ useEffect(() => {
 }, [product])
 
 
-  const { productName, productPrice, productCategory, productQuantity, frameLength, 
+  const { productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity, 
+    shortDescription, highlights, detailedDescription, materialType, frameLength, 
     frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status } = formData;
 
   const onChange = e => 
@@ -74,7 +90,7 @@ useEffect(() => {
   
     const onSubmit = async e => {
         e.preventDefault();
-        updateProduct({ productId, productName, productPrice, productCategory, productQuantity, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate }, history);
+        updateProduct({ productId, productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity, shortDescription, highlights, detailedDescription, materialType, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate }, history);
     };
 
 
@@ -86,12 +102,24 @@ useEffect(() => {
                 <p className="card-description">  </p>
                 <form className="forms-sample" onSubmit={e => onSubmit(e)} >
                   <Form.Group>
-                    <label htmlFor="productName">Name</label>
-                    <Form.Control type="text" name="productName" className="form-control" onChange={e => onChange(e)} value={productName} placeholder="Enter Name" />
+                    <label htmlFor="productName">Title</label>
+                    <Form.Control type="text" name="productName" className="form-control" onChange={e => onChange(e)} value={productName} placeholder="Enter Title" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="brandName">Brand Name</label>
+                    <Form.Control type="text" name="brandName" className="form-control" onChange={e => onChange(e)} value={brandName} placeholder="Enter Brand Name" />
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="productPrice">Price</label>
                     <Form.Control type="number" name="productPrice" className="form-control" onChange={e => onChange(e)} value={productPrice} placeholder="Enter Price" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="salesPrice">Sales Price</label>
+                    <Form.Control type="number" name="salesPrice" className="form-control" onChange={e => onChange(e)} value={salesPrice} placeholder="Enter Sales Price" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="salesPrice">SKU</label>
+                    <Form.Control type="text" name="sku" maxlength="16" className="form-control" onChange={e => onChange(e)} value={sku} placeholder="Enter SKU" />
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="productCategory">Category</label>
@@ -108,6 +136,27 @@ useEffect(() => {
                   <Form.Group>
                     <label htmlFor="productQuantity">Quantity</label>
                     <Form.Control type="number" name="productQuantity" className="form-control" onChange={e => onChange(e)} value={productQuantity} placeholder="Enter Quantity" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="shortDescription">Short Description</label>
+                    <textarea name="shortDescription" className="form-control" onChange={e => onChange(e)} value={shortDescription}  placeholder="Enter Short Description" rows="5"></textarea>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="highlights">Highlights</label>
+                    <textarea name="highlights" className="form-control" onChange={e => onChange(e)} value={highlights} placeholder="Enter Highlights" rows="5"></textarea>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="detailedDescription">Detailed Description</label>
+                    <textarea name="detailedDescription" className="form-control" onChange={e => onChange(e)} value={detailedDescription}  placeholder="Enter Detailed Description" rows="5"></textarea>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="materialType">Material Type</label>
+                    <select className="form-control" name="materialType" onChange={e => onChange(e)} value={materialType}>
+                      <option selected disabled >Select Material Type</option>
+                      <option value="Plastic">Plastic</option>
+                      <option value="Metal">Metal</option>
+                      <option value="Steel">Steel</option>
+                    </select>
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="frameLength">Frame Length</label>
@@ -142,16 +191,18 @@ useEffect(() => {
                       <option value="Deleted">Deleted</option>
                     </select>
                   </Form.Group>
-                  {/* <Form.Group>
-                    <label>Image</label>
-                    <div className="custom-file">
-                      <Form.Control type="file" className="form-control" name="productImage" id="customFileLang" lang="es" style={{ height:"40px" }}/>
-                    </div>
-                  </Form.Group> */}
-                  <Form.Group>
-                    <label htmlFor="productImage">Product Image</label>
-                    <Form.Control type="text" name="productImage" className="form-control" value={productImage} onChange={e => onChange(e)} placeholder="Enter Product Image" />
+                   <Form.Group>
+                    <label htmlFor="productImage">Product Thumbnail</label>
+                    <Form.Control type="text" accept=".png, .jpg, .jpeg" name="productImage" className="form-control"  placeholder="Enter Product Thumbnail" value={productImage} />
                   </Form.Group>
+                  {/* <Form.Group>
+                    <label htmlFor="productGallery">Product Gallery Images</label>
+                    <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productGallary" className="form-control" onChange={galleryUpload} placeholder="Enter Gallery Images" />                  
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="product3dFile">Product 3d File </label>
+                    <Form.Control type="file" accept=".obj" name="product3dFile" className="form-control" onChange={File3dUpload} placeholder="Enter Product 3d File" />
+                  </Form.Group> */}
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="Update" / >
                   <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>
                 </form>

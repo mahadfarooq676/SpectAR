@@ -32,6 +32,10 @@ router.post('/',[
         
     let admin = await Admin.findOne({ email });
 
+    if(admin.status != "Active"){
+        return res.status(400).json({ errors: [{ msg: 'Admin Not Exists' }] });
+    }
+
     if(!admin){
         return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
     }
@@ -41,6 +45,7 @@ router.post('/',[
         return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
         
     }
+    
         const payload = {
             admin: {
                 id:  admin.id

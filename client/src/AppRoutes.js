@@ -24,6 +24,7 @@ import Spinner from './components/shared/Spinner';
 import App from './App';
 import PrivateRoute from './components/routing/privateRoute';
 import addBanner from './components/addBanner';
+import viewOrder from './components/viewOrder';
 
 class AppRoutes extends Component {
   render () {
@@ -51,6 +52,7 @@ class AppRoutes extends Component {
                       <PrivateRoute path='/AppRoutes/manageBanner' component={manageBanners} />
                       <PrivateRoute path='/AppRoutes/addAdmin' component={addAdmin} />
                       <PrivateRoute path='/AppRoutes/updateAdmin' component={updateAdmin} />
+                      <PrivateRoute path='/AppRoutes/viewOrder' component={viewOrder} />
                     </Switch>
                   </Suspense>
                 < SettingsPanel />

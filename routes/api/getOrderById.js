@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const config = require('config');
-const Admin = require('../../models/model_admin'); 
-const { check, validationResult } = require('express-validator');
+const Order = require('../../models/model_order'); 
 
-router.get('/', async (req, res) => {
+
+router.get('/:id', async (req, res) => {
     try{
-        const admin = await Admin.find({status: "Active"});
-        res.json(admin);
+
+        const _id  = req.params.id;
+
+        const order = await Order.findById(_id);
+        res.json(order);
     }catch(err){
        console.log(err.message);
        res.status(500).send('Server error');

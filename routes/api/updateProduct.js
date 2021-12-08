@@ -26,16 +26,24 @@ router.put('/',[
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array() })
     }
-    const { productId, productName, productPrice, productCategory, productQuantity, frameLength, frameWeight,
-         lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate } = req.body;
+    const { productId, productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity,
+         shortDescription, highlights, detailedDescription, materialType, frameLength, frameWeight, lensWidth,
+          lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate } = req.body;
     
     try{
 
         var updateProduct = {
             productName: productName,
+            brandName: brandName,
             productPrice: productPrice,
+            salesPrice: salesPrice,
+            sku: sku,
             productCategory: productCategory,
             productQuantity: productQuantity,
+            shortDescription: shortDescription,
+            detailedDescription: detailedDescription,
+            materialType: materialType,
+            highlights: highlights,
             frameLength: frameLength,
             frameWeight: frameWeight,
             lensWidth: lensWidth,
