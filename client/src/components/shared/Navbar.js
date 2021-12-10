@@ -29,8 +29,8 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
           </button>
           <ul className="navbar-nav navbar-nav-right">
             <li className="nav-item nav-profile">
-              <Dropdown alignRight>
-                <Dropdown.Toggle className="nav-link">
+              <div alignRight>
+                <div className="nav-link">
                   <div className="nav-profile-img">
                     <img src={require("../../assets/images/faces/face1.jpg").default} alt="user"/>
                     <span className="availability-status online"></span>
@@ -38,8 +38,8 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
                   <div className="ml-3">
                     <p className="mb-0 text-black"><Trans>{admin && admin.name}</Trans></p>
                   </div>
-                </Dropdown.Toggle>
-              </Dropdown>
+                </div>
+              </div>
             </li>
             <li className="nav-item nav-logout d-lg-block">
               <a onClick={logout} href="/Login" >
