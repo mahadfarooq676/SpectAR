@@ -96,11 +96,13 @@ const ViewProducts = ({ deleteProduct, history }) => {
   let _id = localStorage.getItem('_id');
 
   const [product,setProduct]=useState({});
+  let [flag,setFlag]=useState(false)
 
 
   useEffect(async () => { 
     const p= await axios.get(URL + 'api/getProduct/'+_id);
     setProduct(p.data);
+    setFlag(true)
   },[]);
 
   const updateProduct = async (_id) => {
@@ -124,7 +126,7 @@ const ViewProducts = ({ deleteProduct, history }) => {
     });
   }
   
-    return product === null ? <Spinner/> : <Fragment>
+    return product === null || !flag ? <Spinner/> : <Fragment>
         <div className="row">
           <div className="col-12 grid-margin">
             <div className="card">
@@ -151,7 +153,7 @@ const ViewProducts = ({ deleteProduct, history }) => {
                       <div style={{ backgroundColor:"#eeeeee", padding:"5px" }} className="col-lg-6 col-md-12 float-right"><p>Bridge Width: <b>{product.bridgeWidth} mm</b></p></div>
                   </div>
                 </div>
-                <div style={{ width: "70%", margin:"0 auto", paddingTop:"30px", paddingBottom:"30px" }}>
+                <div style={{ margin:"auto", paddingTop:"30px", paddingBottom:"30px" }}>
                   <Link className="btn btn-warning mt-1" style={{ width:"200px" }} onClick={() => updateProduct(product._id)} ><i className="mdi mdi-rotate-left"></i>Update</Link>
                   <Link className="btn btn-danger mt-1" style={{ width:"200px" }} onClick={() => deleteProductt(product._id)} ><i className="mdi mdi-delete"></i>Delete</Link>
                   <Link className="btn btn-primary mt-1" style={{ width:"200px" }} to="/appRoutes/manageProduct"><i className="mdi mdi-arrow-left"></i>Go Back</Link>

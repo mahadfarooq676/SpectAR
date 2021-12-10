@@ -15,7 +15,11 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
 
     return (
       <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        
+        <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" onClick={toggleOffcanvas}>
+            <span className="mdi mdi-menu"></span>
+        </button>
+        <div className="navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <Link className="navbar-brand brand-logo" to="/AppRoutes/dashboard"><img src={require('../../assets/images/SpectARLogo.png').default} style={{ width:"170px", height:"auto" }} alt="logo" /></Link>
           <Link className="navbar-brand brand-logo-mini" to="/AppRoutes/dashboard"><img src={require('../../assets/images/SpectARLogoSm.png').default} alt="logo" /></Link>
         </div>
@@ -43,9 +47,6 @@ const Navbar = ({ auth: {isAuthenticated, loading, admin}, logout }) => {
               </a>
             </li>
           </ul>
-          <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" onClick={toggleOffcanvas}>
-            <span className="mdi mdi-menu"></span>
-          </button>
         </div>
       </nav>
     );

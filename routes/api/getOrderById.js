@@ -10,7 +10,8 @@ router.get('/:id', async (req, res) => {
         const _id  = req.params.id;
 
         const order = await Order.findById(_id);
-        res.json(order);
+        // res.json(order);
+        res.status(200).send(order);
     }catch(err){
        console.log(err.message);
        res.status(500).send('Server error');

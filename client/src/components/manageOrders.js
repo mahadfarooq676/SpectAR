@@ -21,7 +21,7 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
 
     const viewOrder = async (_id) => {
       localStorage.setItem('_id',_id);
-      history.push("/appRoutes/viewOrder")
+      history.push("/AppRoutes/viewOrder")
     }
     
 
