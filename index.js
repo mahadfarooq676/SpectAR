@@ -46,9 +46,11 @@ app.use('/api/updateProduct', require('./routes/api/updateProduct'));
 app.use('/api/deleteProduct', require('./routes/api/deleteProduct'));
 app.use('/api/addBanner', require('./routes/api/addBanner'));
 app.use('/api/getBanner', require('./routes/AppApi/getBanners'));
+app.use('/api/deleteBanner', require('./routes/api/deleteBanner'));
 app.use('/api/addOrder', require('./routes/api/addOrder'));
 app.use('/api/getOrders', require('./routes/api/getOrders'));
 app.use('/api/getOrder', require('./routes/api/getOrderById'));
+app.use('/api/getReport', require('./routes/api/getReports'));
 
 
 app.use(express.static(path.join(__dirname, 'build')));

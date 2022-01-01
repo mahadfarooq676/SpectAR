@@ -48,7 +48,6 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                     <thead>
                       <tr>
                         <th> Order Id </th>
-                        <th> User Id </th>
                         <th> Date </th>
                         <th> Status </th>
                         <th> Action </th>
@@ -66,7 +65,6 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                             }).map((order, okey) => (
                               <tr key={okey}>
                               <td>{order._id}</td>
-                              <td>{order.userId}</td>
                               <td>{order.createdTimestamp}</td>
                               <td><label className="badge badge-primary">{order.status}</label></td>
                               <td>

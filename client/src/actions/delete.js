@@ -60,3 +60,33 @@ export const deleteAdmin = ({ _id }, history) => async dispatch => {
 
     }
 }
+
+
+//Delete Bannner
+export const deleteBannerr = ({ _id }, history) => async dispatch => {
+    const config = {
+        headers: {
+            'content-Type': 'application/json',
+        }
+    }
+
+    const body = JSON.stringify({ _id });
+
+    try{
+        const res = await axios.post(URL + 'api/deleteBanner', body, config);
+
+        dispatch({
+            type: DELETE_ADMIN,
+            payload: res.data
+        });
+        window.location="/AppRoutes/manageBanner";
+        dispatch(setAlert('Banner Delete Successfully', 'success'));
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }    
+
+    }
+}

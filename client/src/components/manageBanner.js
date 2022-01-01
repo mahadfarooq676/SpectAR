@@ -6,9 +6,12 @@ import { getBanners } from '../actions/getData';
 import Spinner from './layout/spinner';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { URL } from './../actions/types';
+import { deleteBannerr } from '../actions/delete';
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
-const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) => {
+const ManageBanner = ({ getBanners, deleteBannerr, getData: { banners, loading }, history }) => {
 
   const [ searchTerm, setSerachTerm ] = useState("");
 
@@ -16,21 +19,21 @@ const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) =>
         getBanners();
     }, []);
 
-    // const deleteProduct = async (_id) => {
-    //   confirmAlert({
-    //     title: 'Confirm to delete',
-    //     message: 'Are you sure to do this.',
-    //     buttons: [
-    //       {
-    //         label: 'Yes',
-    //         onClick: () => products.filter(product => (product._id !== _id))
-    //       },
-    //       {
-    //         label: 'No'
-    //       }
-    //     ]
-    //   });
-    // }
+    const deleteBanner = async (_id, banners) => {
+      confirmAlert({
+        title: 'Confirm to delete',
+        message: 'Are you sure to do this.',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => ( deleteBannerr({_id}) )
+          },
+          {
+            label: 'No'
+          }
+        ]
+      });
+    }
 
     return loading && banners === null ? <Spinner /> : <Fragment>
         <div className="row">
@@ -73,7 +76,7 @@ const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) =>
                               <tr>
                               <img src={URL+"public/banner/"+banner.bannerImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
                               <td>{banner.bannerName}</td>
-                              <td><Link className="btn btn-sm btn-gradient-danger mr-2"  ><i className="mdi mdi-delete"></i></Link></td>
+                              <td><Link className="btn btn-sm btn-gradient-danger mr-2" onClick={() => deleteBanner(banner._id)} ><i className="mdi mdi-delete"></i></Link></td>
                             </tr>
                             ))
                         ) : <Spinner/>}
@@ -91,6 +94,7 @@ const ManageBanner = ({ getBanners, getData: { banners, loading }, history }) =>
 
 ManageBanner.propTypes = {
     getBanners: PropTypes.func.isRequired,
+    deleteBannerr: PropTypes.func.isRequired,
     getData: PropTypes.object.isRequired
 };
 
@@ -98,4 +102,4 @@ const mapStateToProps = state => ({
     getData: state.getData
 })
 
-export default connect( mapStateToProps, {getBanners})(ManageBanner);
+export default connect( mapStateToProps, {getBanners, deleteBannerr})(ManageBanner);
