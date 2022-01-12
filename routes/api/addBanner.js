@@ -40,7 +40,7 @@ try{
     });
 
      banner.save();
-        return res.status(200).json([{ msg: 'Banner added successfully' }] );
+        return res.status(200).json([{ msg: 'Banner added successfully' }]);
     
     }catch(err){
         console.log(err.message);
