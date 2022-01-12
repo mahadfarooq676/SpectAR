@@ -70,7 +70,7 @@ const AddBanner = ({ getAllProducts, auth: { admin }, getData: { products, loadi
                     <Form.Control type="text" name="bannerName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Title" />
                   </Form.Group>
                   <Form.Group>
-                    <label htmlFor="bannerName">Product</label>
+                    <label htmlFor="bannerName">Add Product</label>
                     <select className="form-control" name="bannerProduct" onChange={e => onChange(e)}>
                       <option selected disabled>Select Product</option>
                       {products.length > 0 ? (
