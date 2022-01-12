@@ -21,5 +21,5 @@ export const GET_BANNERS = 'GET_BANNERS';
 export const GET_ORDERS = 'GET_ORDERS';
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID';
 export const LOGOUT = 'LOGOUT';
-// export const URL = 'https://spectar-app.herokuapp.com/';
-export const URL = 'http://localhost:5000/';
+export const URL = 'https://spectar-app.herokuapp.com/';
+// export const URL = 'http://localhost:5000/';
