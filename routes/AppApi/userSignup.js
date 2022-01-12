@@ -23,6 +23,9 @@ router.post('/',[
     }
 
     const { firstName, lastName, email, password, gender, phone } = req.body;
+    const address = "";
+    const city = "";
+    const postalCode = "";
 
     try{
         
@@ -38,7 +41,10 @@ router.post('/',[
         email,
         password,
         gender,
-        phone
+        phone,
+        address,
+        city,
+        postalCode
         });
 
         const salt = await bcrypt.genSalt(10);

@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
             "_id": "",
             "bannerImage": "",
             "bannerName": "",
+            "bannerProduct": "",
             "__v": 0
         }] }] );
     }

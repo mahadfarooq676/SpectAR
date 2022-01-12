@@ -4,7 +4,8 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const Order = require('../../models/model_order'); 
+const Order = require('../../models/model_order');
+const User = require('../../models/model_user');
 
 // @route POST api/admin
 // @desc Register Admin 
@@ -17,7 +18,7 @@ router.post('/',[
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const { userId, productList, totalPrice } = req.body;
+    const { userId, productList, totalPrice, address, city, postalCode } = req.body;
 
     var status = "Pending";
 
@@ -45,8 +46,14 @@ router.post('/',[
             createdTimestamp
         });
 
-        
+        var updateUser = {
+            address: address,
+            city: city,
+            postalCode: postalCode
+        }
 
+        
+        await User.findByIdAndUpdate( userId, { $set: updateUser } );
         await order.save();
         return res.status(200).json([{ msg: 'Order added successfully' }] );
         
