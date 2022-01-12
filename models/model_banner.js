@@ -6,6 +6,10 @@ const banner = new mongoose.Schema({
         type: String,
         required: true
     },
+    bannerProduct: {
+        type: String,
+        required: true
+    },
     bannerImage: {
         type: String,
         required: true

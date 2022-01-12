@@ -10,10 +10,6 @@ const order = new mongoose.Schema({
         type: Array,
         required: true
     }],
-    totalPrice: {
-        type: String,
-        required: true
-    },
     status: {
         type: String,
         required: true

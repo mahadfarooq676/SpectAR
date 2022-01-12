@@ -50,7 +50,7 @@ const ViewOrder = ({ history }) => {
             <div className="card">
               <div className="card-body">
                 {console.log(order)}
-                    <h3><b>Order Details {TotalPrice}</b></h3> 
+                    <h3><b>Order Details</b></h3> 
                     <h5 className='ml-2 mt-4'>Order ID: <b>{order[1]}</b></h5>
                     <h5 className='ml-2 mt-4'>Total Price: <b>{TotalPrice}</b> PKR</h5>
                     <div style={{ backgroundColor:"#efefef", borderRadius:"10px", boxShadow: "10px 20px 30px lightblue", padding:"5px", marginBottom:"3px"  }} >

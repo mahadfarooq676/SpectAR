@@ -90,7 +90,6 @@ const ManageProducts = ({ getAllProducts, deleteProduct, getData: { products, lo
                             }).map((product, pkey) => (
                               <tr key={pkey}>
                               <img src={URL+"public/uploads/"+product.productImage} className="img-fluid"style={{maxHeight: '100px', maxWidth: '100'}} ></img>
-                              {/* <td>{URL+"public/uploads/"+product.productImage}</td> */}
                               <td>{product.productName}</td>
                               <td>{product.productPrice}</td>
                               <td>{product.productCategory}</td>

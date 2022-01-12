@@ -1,22 +1,26 @@
-import React, {  useState, useEffect } from "react";
-import { Form } from 'react-bootstrap';
-import { Link, Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setAlert } from '../actions/alert';
-import { addBanner } from '../actions/add';
-import { getCategories } from '../actions/getData';
 import PropTypes from 'prop-types';
-import { Editor } from 'react-draft-wysiwyg';
+import React, { Fragment, useEffect, useState } from "react";
+import { Form } from 'react-bootstrap';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { addBanner } from '../actions/add';
+import { setAlert } from '../actions/alert';
+import { getAllProducts } from '../actions/getData';
+import Spinner from './layout/spinner';
 
-const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
+const AddBanner = ({ getAllProducts, auth: { admin }, getData: { products, loading }, setAlert, addBanner , history }) => {
+
+  let [flag,setFlag]=useState(false)
 
   useEffect(() => {
-    getCategories()
+    getAllProducts();
+    setFlag(true)
   }, [])
 
       const [inputField, setInputField] = useState({
         bannerName: '',
+        bannerProduct: '',
         bannerImage: ''
     });
 
@@ -48,12 +52,13 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
         const formData = new FormData();
         formData.append('bannerImage', inputField.bannerImage, inputField.bannerImage.name);
         formData.append('bannerName', inputField.bannerName);
+        formData.append('bannerProduct', inputField.bannerProduct);
 
         addBanner(formData, history);
       }
     };
 
-    return (
+    return !flag || products == null ? <Spinner /> : <Fragment>
           <div className="col-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
@@ -63,6 +68,17 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
                   <Form.Group>
                     <label htmlFor="bannerName">Title</label>
                     <Form.Control type="text" name="bannerName" className="form-control" onChange={e => onChange(e)}  placeholder="Enter Title" />
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="bannerName">Title</label>
+                    <select className="form-control" name="bannerProduct" onChange={e => onChange(e)}>
+                      <option selected disabled>Select Product</option>
+                      {products.length > 0 ? (
+                            products.map(product => (
+                            <option value={product._id}>{product.productName } --- {product.productPrice} PKR</option>
+                            ))
+                        ) : <option>No Product Found</option>}
+                    </select>
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="bannerImage">Banner Images</label>
@@ -75,8 +91,7 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
             </div>
             <div class="preview-images"></div>
           </div>
-
-    );
+        </Fragment>
   }
 
   AddBanner.propTypes = {
@@ -87,11 +102,12 @@ const AddBanner = ({ auth: { admin }, setAlert, addBanner , history }) => {
 }
 
 const mapStateToProps = state => ({
+  getAllProducts: PropTypes.func.isRequired,
   auth: state.auth,
   getData: state.getData
 });
 
 export default connect(
     mapStateToProps,
-    { setAlert, addBanner, getCategories }
+    { setAlert, addBanner, getAllProducts}
     )(withRouter(AddBanner));

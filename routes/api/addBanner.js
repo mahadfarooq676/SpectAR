@@ -35,7 +35,8 @@ router.post('/', upload.single("bannerImage"), (req, res, next) => {
 try{
     const banner = new Banner({
         bannerImage: bannerImage,
-        bannerName: req.body.bannerName
+        bannerName: req.body.bannerName,
+        bannerProduct: req.body.bannerProduct
     });
 
      banner.save();
