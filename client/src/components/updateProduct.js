@@ -251,7 +251,7 @@ useEffect(() => {
                     <label htmlFor="product3dFile">Product 3d File </label>
                     <Form.Control type="file" accept=".obj" name="product3dFile" className="form-control" onChange={File3dUpload} placeholder="Enter Product 3d File" />
                   </Form.Group>
-                  <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="Update" / >
+                  <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="Update" />
                   <Link to="/ManageProduct" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
