@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.dca1043c.chunk.css",
-    "main.js": "/static/js/main.b8c4211a.chunk.js",
-    "main.js.map": "/static/js/main.b8c4211a.chunk.js.map",
+    "main.js": "/static/js/main.147dd7fb.chunk.js",
+    "main.js.map": "/static/js/main.147dd7fb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0367f21a.js",
     "runtime-main.js.map": "/static/js/runtime-main.0367f21a.js.map",
     "static/css/2.f42b5ed3.chunk.css": "/static/css/2.f42b5ed3.chunk.css",
-    "static/js/2.e8d96821.chunk.js": "/static/js/2.e8d96821.chunk.js",
-    "static/js/2.e8d96821.chunk.js.map": "/static/js/2.e8d96821.chunk.js.map",
+    "static/js/2.5814ad56.chunk.js": "/static/js/2.5814ad56.chunk.js",
+    "static/js/2.5814ad56.chunk.js.map": "/static/js/2.5814ad56.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.f42b5ed3.chunk.css.map": "/static/css/2.f42b5ed3.chunk.css.map",
     "static/css/main.dca1043c.chunk.css.map": "/static/css/main.dca1043c.chunk.css.map",
-    "static/js/2.e8d96821.chunk.js.LICENSE.txt": "/static/js/2.e8d96821.chunk.js.LICENSE.txt",
+    "static/js/2.5814ad56.chunk.js.LICENSE.txt": "/static/js/2.5814ad56.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/static/media/weather.bc7a5081.svg",
     "static/media/SpectARLogoSm.png": "/static/media/SpectARLogoSm.3cd44482.png",
     "static/media/circle.svg": "/static/media/circle.7fdaba90.svg",
@@ -26,8 +26,8 @@
   "entrypoints": [
     "static/js/runtime-main.0367f21a.js",
     "static/css/2.f42b5ed3.chunk.css",
-    "static/js/2.e8d96821.chunk.js",
+    "static/js/2.5814ad56.chunk.js",
     "static/css/main.dca1043c.chunk.css",
-    "static/js/main.b8c4211a.chunk.js"
+    "static/js/main.147dd7fb.chunk.js"
   ]
 }

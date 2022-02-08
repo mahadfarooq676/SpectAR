@@ -14,7 +14,7 @@ export const addProduct = (formdata, history) => async dispatch => {
             payload: res.data
         });
         dispatch(setAlert('New Product Added Successfully', 'success'));
-        history.push('/AppRoutes/manageProduct');
+        history.push('/ManageProduct');
 
     } catch (err) {
         const errors = err.response.data.errors;
@@ -44,7 +44,7 @@ export const updateProduct = ({ productId, productName, brandName, productPrice,
             payload: res.data
         });
         dispatch(setAlert('Product Updated Successfully', 'success'));
-        history.push('/AppRoutes/manageProduct');
+        history.push('/ManageProduct');
     } catch (err) {
         const errors = err.response.data.errors;
 
@@ -74,7 +74,7 @@ export const updateAdmin = ({ adminId, name, email, password, role, addedBy, add
             payload: res.data
         });
         dispatch(setAlert('Admin Updated Successfully', 'success'));
-        history.push('/AppRoutes/manageAdmins');
+        history.push('/ManageAdmins');
     } catch (err) {
         const errors = err.response.data.errors;
 
@@ -104,7 +104,7 @@ export const addBanner = (formData, history) => async dispatch => {
             payload: res.data
         });
         dispatch(setAlert('New Banner Added Successfully', 'success'));
-        history.push('/AppRoutes/manageBanner');
+        history.push('/ManageBanner');
 
     } catch (err) {
         const errors = err.response.data.errors;

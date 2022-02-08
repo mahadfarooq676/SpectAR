@@ -96,7 +96,7 @@ useEffect(() => {
                     </select>
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
-                  <Link to="/AppRoutes/manageAdmins" className="btn btn-light">Cancel</Link>
+                  <Link to="/ManageAdmins" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
             </div>

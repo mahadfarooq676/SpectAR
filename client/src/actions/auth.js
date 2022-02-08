@@ -22,7 +22,7 @@ export const register = ({name, email, password, role, addedBy, addedDate, statu
             payload: res.data
         });
         dispatch(setAlert('New Admin Created', 'success'));
-        history.push('/AppRoutes/manageAdmins');
+        history.push('/ManageAdmins');
     } catch (err) {
         const errors = err.response.data.errors;
 

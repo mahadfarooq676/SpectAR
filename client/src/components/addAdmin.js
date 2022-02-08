@@ -70,7 +70,7 @@ var status = "Active";
                     </select>
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
-                  <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>
+                  <Link to="/ManageProduct" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
             </div>

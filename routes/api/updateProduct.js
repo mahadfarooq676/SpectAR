@@ -1,13 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const config = require('config');
 const Product = require('../../models/model_product'); 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "client/public/uploads/");
+    },
+    filename: (req, file, cb) => {
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, Date.now() + '-' + fileName)
+    }
+});
+
+var upload = multer({
+    storage: storage
+});
 
 // @route POST api/product
 // @desc Add Product 
 // @access Public
-router.put('/',[
+router.put('/',upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }]),
+[
     check('productId', 'Product Id is required').not().isEmpty(),
     check('productName', 'Product Name is required').not().isEmpty(),
     check('productPrice', 'Product Price is required').not().isEmpty(),
@@ -26,35 +41,42 @@ router.put('/',[
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array() })
     }
-    const { productId, productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity,
-         shortDescription, highlights, detailedDescription, materialType, frameLength, frameWeight, lensWidth,
-          lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate } = req.body;
+
+    const productImage = req.files.productImage[0].filename;
+    const product3dFile = req.files.product3dFile[0].filename;
+    const reqFiles = [];
+    for (var i = 0; i < req.files.productGallery.length; i++) {
+        reqFiles.push(req.files.productGallery[i].filename)
+    }
+    const {productId} = req.body;
     
     try{
 
-        var updateProduct = {
-            productName: productName,
-            brandName: brandName,
-            productPrice: productPrice,
-            salesPrice: salesPrice,
-            sku: sku,
-            productCategory: productCategory,
-            productQuantity: productQuantity,
-            shortDescription: shortDescription,
-            detailedDescription: detailedDescription,
-            materialType: materialType,
-            highlights: highlights,
-            frameLength: frameLength,
-            frameWeight: frameWeight,
-            lensWidth: lensWidth,
-            lensHeight: lensHeight,
-            templeLength: templeLength,
-            bridgeWidth: bridgeWidth,
+        const product = new Product({
+            productName: req.body.productName,
+            brandName: req.body.brandName,
+            productPrice: req.body.productPrice,
+            salesPrice: req.body.salesPrice,
+            sku: req.body.sku,
+            productCategory: req.body.productCategory,
+            productQuantity: req.body.productQuantity,
+            shortDescription: req.body.shortDescription,
+            highlights: req.body.highlights,
+            detailedDescription: req.body.detailedDescription,
+            materialType: req.body.materialType,
+            frameLength: req.body.frameLength,
+            frameWeight: req.body.frameWeight,
+            lensWidth: req.body.lensWidth,
+            lensHeight: req.body.lensHeight,
+            templeLength: req.body.templeLength,
+            bridgeWidth: req.body.bridgeWidth,
             productImage: productImage,
-            status: status,
-            addedBy: addedBy,
-            addedDate: addedDate
-        }
+            productGallery: reqFiles,
+            product3dFile: product3dFile,
+            status: req.body.status,
+            addedBy: req.body.addedBy, 
+            addedDate: req.body.addedDate,
+        });
         
 
         await Product.findByIdAndUpdate( productId, { $set: updateProduct } );

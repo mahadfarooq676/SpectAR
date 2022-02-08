@@ -1,15 +1,14 @@
-import React, { Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect  } from 'react-router-dom'
-import { history } from 'react-router'
-import { connect } from 'react-redux';
-import { getAllProducts } from '../actions/getData';
-import { deleteProduct } from '../actions/delete';
-import Spinner from './layout/spinner';
-import { confirmAlert } from 'react-confirm-alert'; 
+import React, { Fragment, useEffect, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { deleteProduct } from '../actions/delete';
+import { getAllProducts } from '../actions/getData';
 import { URL } from './../actions/types';
-
+import Spinner from './layout/spinner';
+import { ExportCSV } from './exportToCsv';
 
 const ManageProducts = ({ getAllProducts, deleteProduct, getData: { products, loading }, history }) => {
 
@@ -19,15 +18,18 @@ const ManageProducts = ({ getAllProducts, deleteProduct, getData: { products, lo
         getAllProducts();
     }, []);
 
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
 
     const viewProduct = async (_id) => {
       localStorage.setItem('_id',_id);
-      history.push("/appRoutes/viewProduct")
+      history.push("/ViewProduct")
     }
 
     const updateProduct = async (_id) => {
       localStorage.setItem('_id',_id);
-      history.push("/appRoutes/updateProduct")
+      history.push("/UpdateProduct")
     }
 
     const deleteProductt = async (_id) => {
@@ -48,11 +50,14 @@ const ManageProducts = ({ getAllProducts, deleteProduct, getData: { products, lo
 
     return loading && products === null ? <Spinner /> : <Fragment>
         <div className="row">
-        <div className="col-3 mb-3"><Link to="/AppRoutes/addProduct" className="btn btn-gradient-primary"><i className="mdi mdi-plus menu-icon"></i>Add Product</Link></div>
+        <div className="col-3 mb-3"><Link to="/AddProduct" className="btn btn-gradient-primary"><i className="mdi mdi-plus menu-icon"></i>Add Product</Link></div>
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Products</h4>
+              <div className='row'>
+                  <div className='col-6'><h4 className="">products</h4></div>
+                  <div className="col-6"><ExportCSV csvData={products} fileName={"Products-"+time+".xlsx"} /></div>
+                </div>
                 <div className="search-field d-none d-md-block mt-4 mb-4">
                     <div className="input-group">
                       <div className="input-group-prepend">
@@ -66,7 +71,7 @@ const ManageProducts = ({ getAllProducts, deleteProduct, getData: { products, lo
                     </div>
                 </div>
                 <div className="table-responsive">
-                  <table className="table">
+                  <table className="table text-center">
                     <thead>
                       <tr>
                         <th> Product Image </th>

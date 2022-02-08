@@ -1,36 +1,64 @@
-import React, { Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect  } from 'react-router-dom'
-import { history } from 'react-router'
+import React, { Fragment, useEffect, useState } from 'react';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getOrders } from '../actions/getData';
-import { deleteProduct } from '../actions/delete';
 import Spinner from './layout/spinner';
+import { deleteAdmin } from '../actions/delete';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { URL } from './../actions/types';
-
+import { ExportCSV } from './exportToCsv';
 
 const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
 
     const [ searchTerm, setSerachTerm ] = useState("");
+    let [ flag, setFlag ]=useState(false);
 
     useEffect(() => {
         getOrders();
+        setFlag(true);
     }, []);
+
+    const changeStatus = async (_id) => {
+      confirmAlert({
+        title: 'Confirm to change status',
+        message: 'Are you sure to do this.',
+        buttons: [
+          {
+            label: 'Yes',
+          },
+          {
+            label: 'No'
+          }
+        ]
+      });
+    }
+    const date = new Date();
+    const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
     const viewOrder = async (_id) => {
       localStorage.setItem('_id',_id);
-      history.push("/AppRoutes/viewOrder")
+      history.push("/ViewOrder")
     }
-    
+    const [formData, setFormData] = useState({
+      orderStatus: '',
+    });
 
-    return loading && orders === null ? <Spinner /> : <Fragment>
+    var { orderStatus } = formData;
+
+    const onChange = e => 
+      setFormData({ ...formData, [e.target.name]: e.target.value});
+
+    return flag === true && orders === null ? <Spinner /> : <Fragment>
       <div className="row">
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Orders</h4>
+                <div className='row'>
+                  <div className='col-6'><h4 className="">Orders</h4></div>
+                  <div className="col-6"><ExportCSV csvData={orders} fileName={"Orders-"+time+".xlsx"} /></div>
+                </div>
                 <div className="search-field d-none d-md-block mt-4 mb-4">
                     <div className="input-group">
                       <div className="input-group-prepend">
@@ -44,13 +72,13 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                     </div>
                 </div>
                 <div className="table-responsive">
-                  <table className="table">
+                  <table className="table text-center">
                     <thead>
                       <tr>
-                        <th> Order Id </th>
-                        <th> Date </th>
-                        <th> Status </th>
-                        <th> Action </th>
+                        <th className='w-25'> Order Id </th>
+                        <th className='w-25'> Date </th>
+                        <th className='w-25'> Status </th>
+                        <th className='w-25'> Action </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -66,11 +94,19 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                               <tr key={okey}>
                               <td>{order._id}</td>
                               <td>{order.createdTimestamp}</td>
-                              <td><label className="badge badge-primary">{order.status}</label></td>
+                              {/* <td><label className="badge badge-primary">{order.status}</label></td> */}
+                              <td>
+                                <form>
+                                  <select className="form-control badge-dark badge" name="orderStatus" onChange={e => onChange(e)} value={orderStatus}>
+                                    <option className="form-control badge badge-danger" value="Rejected">Rejected</option>
+                                    <option className="form-control badge badge-primary" value="Pending">Pending</option>
+                                    <option className="form-control badge badge-warning" value="Processing">Processing</option>
+                                    <option className="form-control badge badge-success" value="Completed">Completed</option>
+                                  </select>
+                                </form>
+                              </td>
                               <td>
                                 <Link className="btn btn-sm btn-gradient-success mr-2" onClick={() => viewOrder(order._id)} ><i className="mdi mdi-eye"></i></Link>
-                              {/* <Link className="btn btn-sm btn-gradient-info mr-2" onClick={() => updateProduct(product._id)} ><i className="mdi mdi-rotate-left"></i></Link>
-                              <Link className="btn btn-sm btn-gradient-danger mr-2" onClick={() => deleteProductt(product._id)} ><i className="mdi mdi-delete"></i></Link>  */}
                               </td>
                             </tr>
                             ))

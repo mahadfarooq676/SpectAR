@@ -85,7 +85,7 @@ const AddBanner = ({ getAllProducts, auth: { admin }, getData: { products, loadi
                     <Form.Control type="file" accept=".png, .jpg, .jpeg" name="bannerImage" className="form-control" onChange={galleryUpload} placeholder="Enter Banner Image" />
                   </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
-                  <Link to="/AppRoutes/manageBanner" className="btn btn-light">Cancel</Link>
+                  <Link to="/ManageBanner" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
             </div>

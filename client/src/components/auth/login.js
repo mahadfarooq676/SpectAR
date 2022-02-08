@@ -26,7 +26,7 @@ const Login = ({ login, isAuthenticated }) => {
 
 // Redirect If Looged In
 if(isAuthenticated) {
-    return <Redirect to="/AppRoutes/dashboard" />
+    return <Redirect to="/Dashboard" />
 }
 
         return (

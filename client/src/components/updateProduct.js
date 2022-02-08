@@ -18,7 +18,7 @@ const UpdateProduct = ({ auth: { admin }, setAlert, getCategories, updateProduct
   const [product,setProduct]=useState({});
 
 
-  const [formData, setFormData] = useState({
+  const [inputField, setInputField] = useState({
       productName: '',
       brandName: 'No Brand',
       productPrice:  '',
@@ -57,7 +57,7 @@ useEffect(async () => {
 },[]);
 
 useEffect(() => {
-  setFormData({
+  setInputField({
     productName: !product.productName ? '' : product.productName,
     brandName: !product.brandName ? '' : product.brandName,
     productPrice: !product.productPrice ? '' : product.productPrice,
@@ -83,14 +83,54 @@ useEffect(() => {
 
   const { productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity, 
     shortDescription, highlights, detailedDescription, materialType, frameLength, 
-    frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status } = formData;
+    frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status } = inputField;
 
   const onChange = e => 
-        setFormData({ ...formData, [e.target.name]: e.target.value});
+  setInputField({ ...inputField, [e.target.name]: e.target.value});
+
+  const imageUpload = (event) => {
+    setInputField({ ...inputField, productImage: event.target.files[0]});
+  }
+
+  const galleryUpload = (event) => {
+    setInputField({ ...inputField, productGallery: event.target.files});
+  }
+
+  const File3dUpload = (event) => {
+    setInputField({ ...inputField, product3dFile: event.target.files[0]});
+  }
   
     const onSubmit = async e => {
         e.preventDefault();
-        updateProduct({ productId, productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity, shortDescription, highlights, detailedDescription, materialType, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate }, history);
+        const formdata = new FormData();
+        formdata.append('productImage', inputField.productImage, inputField.productImage.name);
+        for (const key of Object.keys(inputField.productGallery)) {
+          formdata.append('productGallery', inputField.productGallery[key])
+      }
+        formdata.append('product3dFile', inputField.product3dFile, inputField.product3dFile.name);
+        formdata.append('productID', productId);
+        formdata.append('productName', inputField.productName);
+        formdata.append('brandName', inputField.brandName);
+        formdata.append('productPrice', inputField.productPrice);
+        formdata.append('salesPrice', inputField.salesPrice);
+        formdata.append('sku', inputField.sku);
+        formdata.append('productCategory', inputField.productCategory);
+        formdata.append('productQuantity', inputField.productQuantity);
+        formdata.append('shortDescription', inputField.shortDescription);
+        formdata.append('highlights', inputField.highlights);
+        formdata.append('detailedDescription', inputField.detailedDescription);
+        formdata.append('materialType', inputField.materialType);
+        formdata.append('frameLength', inputField.frameLength);
+        formdata.append('frameWeight', inputField.frameWeight);
+        formdata.append('lensWidth', inputField.lensWidth);
+        formdata.append('lensHeight', inputField.lensHeight);
+        formdata.append('templeLength', inputField.templeLength);
+        formdata.append('bridgeWidth', inputField.bridgeWidth);
+        formdata.append('status', inputField.status);
+        formdata.append('addedBy', addedBy);
+        formdata.append('addedDate', addedDate);
+
+        updateProduct(formdata, history);
     };
 
 
@@ -100,7 +140,7 @@ useEffect(() => {
               <div className="card-body">
                 <h4 className="card-title">Update Product</h4>
                 <p className="card-description">  </p>
-                <form className="forms-sample" onSubmit={e => onSubmit(e)} >
+                <form className="forms-sample" onSubmit={e => onSubmit(e)} encType='multipart/form-data' >
                   <Form.Group>
                     <label htmlFor="productName">Title</label>
                     <Form.Control type="text" name="productName" className="form-control" onChange={e => onChange(e)} value={productName} placeholder="Enter Title" />
@@ -196,15 +236,23 @@ useEffect(() => {
                     <Form.Control type="text" accept=".png, .jpg, .jpeg" name="productImage" className="form-control"  placeholder="Enter Product Thumbnail" value={productImage} />
                   </Form.Group>
                   {/* <Form.Group>
+                    <label htmlFor="productImage">Product Thumbnail</label>
+                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" placeholder="Enter Product Thumbnail" />
+                  </Form.Group> */}
+                  <Form.Group>
+                    <label htmlFor="productImage">Product Thumbnail</label>
+                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Thumbnail" />
+                  </Form.Group>
+                  <Form.Group>
                     <label htmlFor="productGallery">Product Gallery Images</label>
                     <Form.Control type="file" multiple accept=".png, .jpg, .jpeg" name="productGallary" className="form-control" onChange={galleryUpload} placeholder="Enter Gallery Images" />                  
                   </Form.Group>
                   <Form.Group>
                     <label htmlFor="product3dFile">Product 3d File </label>
                     <Form.Control type="file" accept=".obj" name="product3dFile" className="form-control" onChange={File3dUpload} placeholder="Enter Product 3d File" />
-                  </Form.Group> */}
+                  </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="Update" / >
-                  <Link to="/AppRoutes/manageProduct" className="btn btn-light">Cancel</Link>
+                  <Link to="/ManageProduct" className="btn btn-light">Cancel</Link>
                 </form>
               </div>
             </div>

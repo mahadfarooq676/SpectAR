@@ -20,7 +20,7 @@ export const deleteProduct = ({ _id }, history) => async dispatch => {
             type: DELETE_PRODUCT,
             payload: res.data
         });
-        window.location="/AppRoutes/manageProduct";
+        window.location="/ManageProduct";
         dispatch(setAlert('Product Delete Successfully', 'success'));
     } catch (err) {
         const errors = err.response.data.errors;
@@ -49,7 +49,7 @@ export const deleteAdmin = ({ _id }, history) => async dispatch => {
             type: DELETE_ADMIN,
             payload: res.data
         });
-        window.location="/AppRoutes/manageAdmins";
+        window.location="/ManageAdmins";
         dispatch(setAlert('Admin Delete Successfully', 'success'));
     } catch (err) {
         const errors = err.response.data.errors;
@@ -79,7 +79,7 @@ export const deleteBannerr = ({ _id }, history) => async dispatch => {
             type: DELETE_ADMIN,
             payload: res.data
         });
-        window.location="/AppRoutes/manageBanner";
+        window.location="/ManageBanner";
         dispatch(setAlert('Banner Delete Successfully', 'success'));
     } catch (err) {
         const errors = err.response.data.errors;

@@ -76,7 +76,7 @@ const ViewOrder = ({ history }) => {
                     }
                 
                 <div style={{ width: "70%", paddingTop:"40px" }}>
-                  <Link className="btn btn-primary mt-1" style={{ width:"200px" }} to="/AppRoutes/manageOrders"><i className="mdi mdi-arrow-left"></i>Go Back</Link>
+                  <Link className="btn btn-primary mt-1" style={{ width:"200px" }} to="/ManageOrders"><i className="mdi mdi-arrow-left"></i>Go Back</Link>
                 </div>
                 </div>
             </div>

@@ -37,7 +37,7 @@ const ManageBanner = ({ getBanners, deleteBannerr, getData: { banners, loading }
 
     return loading && banners === null ? <Spinner /> : <Fragment>
         <div className="row">
-        <div className="col-3 mb-3"><Link to="/AppRoutes/addBanner" className="btn btn-gradient-primary"><i className="mdi mdi-plus menu-icon"></i>Add Banner</Link></div>
+        <div className="col-3 mb-3"><Link to="/AddBanner" className="btn btn-gradient-primary"><i className="mdi mdi-plus menu-icon"></i>Add Banner</Link></div>
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">

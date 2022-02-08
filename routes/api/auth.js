@@ -31,19 +31,17 @@ router.post('/',[
     try{
         
     let admin = await Admin.findOne({ email });
-
-    if(admin.status != "Active"){
-        return res.status(400).json({ errors: [{ msg: 'Admin Not Exists' }] });
-    }
-
+   
     if(!admin){
         return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
     }
-    
+
     const isMatch = await bcrypt.compare(password, admin.password);
-    if(!isMatch){
+
+    if(admin.status != "Active"){
+        return res.status(400).json({ errors: [{ msg: 'Admin Not Exists' }] });
+    }else if(!isMatch){
         return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
-        
     }
     
         const payload = {

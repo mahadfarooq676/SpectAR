@@ -19,7 +19,7 @@ const ManageAdmins = ({ getAllAdmins, deleteAdmin, getData: { admins, loading },
 
     const updateAdmin = async (_id) => {
       localStorage.setItem('_id',_id);
-      history.push("/appRoutes/updateAdmin")
+      history.push("/UpdateAdmin")
     }
 
     const deleteAdminn = async (_id, products) => {
@@ -40,7 +40,7 @@ const ManageAdmins = ({ getAllAdmins, deleteAdmin, getData: { admins, loading },
 
     return loading && admins === null ? <Spinner /> : <Fragment>
         <div className="row">
-        <div className="col-3 mb-3"><Link to="/AppRoutes/addAdmin" className="btn btn-gradient-primary mr-2"><i className="mdi mdi-plus menu-icon"></i>Add Admin</Link></div>
+        <div className="col-3 mb-3"><Link to="/AddAdmin" className="btn btn-gradient-primary mr-2"><i className="mdi mdi-plus menu-icon"></i>Add Admin</Link></div>
           <div className="col-12 grid-margin">
             <div className="card">
               <div className="card-body">

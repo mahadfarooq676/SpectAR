@@ -41,18 +41,18 @@ class AppRoutes extends Component {
                   <Suspense fallback={<Spinner/>}>
                     <Switch>
                       <Route path='/Login' component={App}/>
-                      <PrivateRoute path='/AppRoutes/dashboard' component={Dashboard} />
-                      <PrivateRoute path='/AppRoutes/addProduct' component={AddProduct} />
-                      <PrivateRoute path='/AppRoutes/manageProduct' component={manageProduct} />
-                      <PrivateRoute path='/AppRoutes/updateProduct' component={updateProduct} />
-                      <PrivateRoute path='/AppRoutes/viewProduct' component={viewProduct} />
-                      <PrivateRoute path='/AppRoutes/manageOrders' component={manageOrders} />
-                      <PrivateRoute path='/AppRoutes/addBanner' component={addBanner} />
-                      <PrivateRoute path='/AppRoutes/manageAdmins' component={manageAdmins} />
-                      <PrivateRoute path='/AppRoutes/manageBanner' component={manageBanners} />
-                      <PrivateRoute path='/AppRoutes/addAdmin' component={addAdmin} />
-                      <PrivateRoute path='/AppRoutes/updateAdmin' component={updateAdmin} />
-                      <PrivateRoute path='/AppRoutes/viewOrder' component={viewOrder} />
+                      <PrivateRoute path='/Dashboard' component={Dashboard} />
+                      <PrivateRoute path='/AddProduct' component={AddProduct} />
+                      <PrivateRoute path='/ManageProduct' component={manageProduct} />
+                      <PrivateRoute path='/UpdateProduct' component={updateProduct} />
+                      <PrivateRoute path='/ViewProduct' component={viewProduct} />
+                      <PrivateRoute path='/ManageOrders' component={manageOrders} />
+                      <PrivateRoute path='/AddBanner' component={addBanner} />
+                      <PrivateRoute path='/ManageAdmins' component={manageAdmins} />
+                      <PrivateRoute path='/ManageBanner' component={manageBanners} />
+                      <PrivateRoute path='/AddAdmin' component={addAdmin} />
+                      <PrivateRoute path='/UpdateAdmin' component={updateAdmin} />
+                      <PrivateRoute path='/ViewOrder' component={viewOrder} />
                     </Switch>
                   </Suspense>
                 < SettingsPanel />

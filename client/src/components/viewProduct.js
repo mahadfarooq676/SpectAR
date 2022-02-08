@@ -11,86 +11,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import style from '../assets/styles/productImage.css';
 
-// class ViewProducts extends Component{
-//    state={
-//      product:{}
-//       }
-//   async componentDidMount(){
-//     let id = JSON.stringify(window.location.href);
-//     var _id = id.substring(45, id.length-1);
-
-//     const p= await axios.get('http://localhost:5000/api/getProduct/'+_id);
-
-//     this.setState({product:p.data});
-//   }
-
-//   render(){
-//     return this.state.product._id === null ? <Spinner/> : <Fragment>
-//         <div className="row">
-//           <div className="col-12 grid-margin">
-//             <div className="card">
-//               <div className="card-body">
-//                 <h4 className="card-title">View Product</h4>
-//                 <div className="table-responsive">
-//                   <table className="table">
-//                     <tbody>
-//                             <tr>
-//                               <th>Product Name</th>
-//                               <td>{this.state.product.productName}</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Product Price</th>
-//                               <td>{this.state.product.productPrice} PKR</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Product Categroy</th>
-//                               <td>{this.state.product.productCategory}</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Product Quantity</th>
-//                               <td>{this.state.product.productQuantity} peice</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Frame Length</th>
-//                               <td>{this.state.product.frameLength} mm</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Frame Weight</th>
-//                               <td>{this.state.product.frameWeight} g</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Lens Width</th>
-//                               <td>{this.state.product.lensWidth} mm</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Lens Height</th>
-//                               <td>{this.state.product.lensHeight} mm</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Temple Length</th>
-//                               <td>{this.state.product.templeLength} mm</td>
-//                             </tr>
-//                             <tr>
-//                               <th>Bridge Width</th>
-//                               <td>{this.state.product.bridgeWidth} mm</td>
-//                             </tr>
-//                     </tbody>
-//                   </table>
-//                             <div style={{ width: "70%", margin:"0 auto", paddingTop:"40px" }}>
-//                             <Link className="btn btn-warning" style={{ width:"200px" }} to="updateProduct"><i className="mdi mdi-rotate-left"></i>Update</Link>
-//                             <Link className="btn btn-danger" style={{ width:"200px" }}><i className="mdi mdi-delete"></i>Delete</Link>
-//                             <Link className="btn btn-primary" style={{ width:"200px" }} to="/appRoutes/manageProduct"><i className="mdi mdi-arrow-left"></i>Go Back</Link>
-//                             </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-        
-//     </Fragment>
-//   }
-// }
-
 const ViewProducts = ({ deleteProduct, history }) => {
 
   let _id = localStorage.getItem('_id');
@@ -107,7 +27,7 @@ const ViewProducts = ({ deleteProduct, history }) => {
 
   const updateProduct = async (_id) => {
     localStorage.setItem('_id',_id);
-    history.push("/appRoutes/updateProduct")
+    history.push("/UpdateProduct")
   }
 
   const deleteProductt = async (_id) => {
@@ -156,7 +76,7 @@ const ViewProducts = ({ deleteProduct, history }) => {
                 <div style={{ margin:"auto", paddingTop:"30px", paddingBottom:"30px" }}>
                   <Link className="btn btn-warning mt-1" style={{ width:"200px" }} onClick={() => updateProduct(product._id)} ><i className="mdi mdi-rotate-left"></i>Update</Link>
                   <Link className="btn btn-danger mt-1" style={{ width:"200px" }} onClick={() => deleteProductt(product._id)} ><i className="mdi mdi-delete"></i>Delete</Link>
-                  <Link className="btn btn-primary mt-1" style={{ width:"200px" }} to="/appRoutes/manageProduct"><i className="mdi mdi-arrow-left"></i>Go Back</Link>
+                  <Link className="btn btn-primary mt-1" style={{ width:"200px" }} to="/ManageProduct"><i className="mdi mdi-arrow-left"></i>Go Back</Link>
                 </div>
             </div>
           </div>
