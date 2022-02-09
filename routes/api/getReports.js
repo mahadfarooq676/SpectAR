@@ -15,6 +15,12 @@ var oneWeekBefore = new Date(addedDate.setDate(addedDate.getDate() - 7));
     var lyyyy = oneWeekBefore.getFullYear();
     var lcreatedTimestamp = lmm + '/' + ldd + '/' + lyyyy;
 
+var oneMonthBefore = new Date(addedDate.setDate(addedDate.getDate() - 30));
+    var mdd = String(oneMonthBefore.getDate()).padStart(2, '0');
+    var mmm = String(oneMonthBefore.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var myyyy = oneMonthBefore.getFullYear();
+    var mcreatedTimestamp = mmm + '/' + mdd + '/' + myyyy;
+
 router.get('/', async (req, res) => {
     try{
         const order = await Order.find({ 
@@ -25,15 +31,35 @@ router.get('/', async (req, res) => {
         }, "totalPrice").select('-_id');
 
         const len = order.length;
-        let TotalPrice = 0;
+        let TotalPriceWeek = 0;
         
         for (let i = 0; i < len; i++) {
-            TotalPrice = parseInt(TotalPrice) + parseInt(order[i].totalPrice);
+            TotalPriceWeek = parseInt(TotalPriceWeek) + parseInt(order[i].totalPrice);
         }
+
+        const order1 = await Order.find({ 
+            createdTimestamp:{
+            '$lte': createdTimestamp,
+            '$gte': mcreatedTimestamp
+            }
+    }, "totalPrice").select('-_id');
+
+    const len1 = order1.length;
+    let TotalPriceMonth = 0;
+        
+        for (let i = 0; i < len1; i++) {
+            TotalPriceMonth = parseInt(TotalPriceMonth) + parseInt(order1[i].totalPrice);
+        }
+
+        var reports = [];
+
+        reports[0] = TotalPriceWeek;
+        reports[1] = len;
+        reports[2] = TotalPriceMonth;
 
         
 
-        res.json(TotalPrice);
+        res.json(reports);
     }catch(err){
        console.log(err.message);
        res.status(500).send('Server error');

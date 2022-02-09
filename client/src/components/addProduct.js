@@ -36,7 +36,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
       productImage: '',
       productGallery: '',
       product3dFile: '',
-      productMTLFile: '',
+      // productMTLFile: '',
       status: ''
     });
 
@@ -66,13 +66,13 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
       setInputField({ ...inputField, product3dFile: event.target.files[0]});
     }
 
-    const FileMTLUpload = (event) => {
-      setInputField({ ...inputField, productMTLFile: event.target.files[0]});
-    }
+    // const FileMTLUpload = (event) => {
+    //   setInputField({ ...inputField, productMTLFile: event.target.files[0]});
+    // }
   
     const onSubmit = async e => {
         e.preventDefault();
-        if( !inputField.productName || !inputField.productPrice || !inputField.sku || !inputField.productCategory || !inputField.productQuantity|| !inputField.shortDescription || !inputField.detailedDescription || !inputField.materialType || !inputField.frameLength || !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || !inputField.bridgeWidth || !inputField.productGallery || !inputField.productImage || !inputField.product3dFile || !inputField.productMTLFile || !inputField.status ){
+        if( !inputField.productName || !inputField.productPrice || !inputField.sku || !inputField.productCategory || !inputField.productQuantity|| !inputField.shortDescription || !inputField.detailedDescription || !inputField.materialType || !inputField.frameLength || !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || !inputField.bridgeWidth || !inputField.productGallery || !inputField.productImage || !inputField.product3dFile || !inputField.status ){
           setAlert('All fiels are required','danger');
       }else if(!inputField.brandName){
         setInputField({ ...inputField, brandName: 'No Brand'})
@@ -88,7 +88,7 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
           formdata.append('productGallery', inputField.productGallery[key])
       }
         formdata.append('product3dFile', inputField.product3dFile, inputField.product3dFile.name);
-        formdata.append('productMTLFile', inputField.productMTLFile, inputField.productMTLFile.name);
+        // formdata.append('productMTLFile', inputField.productMTLFile, inputField.productMTLFile.name);
         formdata.append('productName', inputField.productName);
         formdata.append('brandName', inputField.brandName);
         formdata.append('productPrice', inputField.productPrice);
@@ -234,10 +234,10 @@ const AddProduct = ({ auth: { admin }, setAlert, getCategories, addProduct , his
                     <label htmlFor="product3dFile">Product 3d File </label>
                     <Form.Control type="file" accept=".obj" name="product3dFile" className="form-control" onChange={File3dUpload} placeholder="Enter Product 3d File" />
                   </Form.Group>
-                  <Form.Group>
+                  {/* <Form.Group>
                     <label htmlFor="product3dFile">Product MTL File </label>
                     <Form.Control type="file" accept=".mtl" name="productMTLFile" className="form-control" onChange={FileMTLUpload} placeholder="Enter Product MTL File" />
-                  </Form.Group>
+                  </Form.Group> */}
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="submit" / >
                   <Link to="/ManageProduct" className="btn btn-light">Cancel</Link>
                 </form>

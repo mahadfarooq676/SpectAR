@@ -24,11 +24,11 @@ var upload = multer({
 // router.post('/', upload.single("productImage"), async (req,res) => {
     
     // router.post('/',  upload.array('productGallery', 6), (req,res) => {
-    router.post('/',  upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }, { name: 'productMTLFile', maxCount: 1 }]), (req,res) => {
+    router.post('/',  upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }]), (req,res) => {
     
     const productImage = req.files.productImage[0].filename;
     const product3dFile = req.files.product3dFile[0].filename;
-    const productMTLFile = req.files.productMTLFile[0].filename;
+    // const productMTLFile = req.files.productMTLFile[0].filename;
     const reqFiles = [];
     for (var i = 0; i < req.files.productGallery.length; i++) {
         reqFiles.push(req.files.productGallery[i].filename)
@@ -56,7 +56,7 @@ var upload = multer({
             productImage: productImage,
             productGallery: reqFiles,
             product3dFile: product3dFile,
-            productMTLFile: productMTLFile,
+            // productMTLFile: productMTLFile,
             status: req.body.status,
             addedBy: req.body.addedBy, 
             addedDate: req.body.addedDate,

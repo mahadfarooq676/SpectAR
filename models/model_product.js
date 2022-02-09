@@ -79,9 +79,9 @@ const product = new mongoose.Schema({
     product3dFile: {
         type: String
     },
-    productMTLFile: {
-        type: String
-    },
+    // productMTLFile: {
+    //     type: String
+    // },
     status: {
         type: String,
         required: true

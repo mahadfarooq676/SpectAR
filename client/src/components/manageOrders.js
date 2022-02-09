@@ -92,10 +92,10 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                               }
                             }).map((order, okey) => (
                               <tr key={okey}>
-                              <td>{order._id}</td>
+                              <td>{order._id.substr(18,24)}</td>
                               <td>{order.createdTimestamp}</td>
-                              {/* <td><label className="badge badge-primary">{order.status}</label></td> */}
-                              <td>
+                              <td><label className="badge badge-gradient-primary" style={{ width:"100px" }}>{order.status}</label></td>
+                              {/* <td>
                                 <form>
                                   <select className="form-control badge-dark badge" name="orderStatus" onChange={e => onChange(e)} value={orderStatus}>
                                     <option className="form-control badge badge-danger" value="Rejected">Rejected</option>
@@ -104,7 +104,17 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                                     <option className="form-control badge badge-success" value="Completed">Completed</option>
                                   </select>
                                 </form>
-                              </td>
+                              </td> */}
+                              <td>
+                              <form>
+                                  <select className="badge badge-gradient-primary" name="orderStatus" value={orderStatus} onChange={e => onChange(e)}>
+                                    <option value="Pending" className="bg-dark">Pending</option>
+                                    <option value="InProgress" className="bg-secondary">InProgress</option>
+                                    <option value="Processed" className="bg-success">Processed</option>
+                                    <option value="Rejected" className="bg-danger">Rejected</option>
+                                  </select>
+                                </form>
+                                </td>
                               <td>
                                 <Link className="btn btn-sm btn-gradient-success mr-2" onClick={() => viewOrder(order._id)} ><i className="mdi mdi-eye"></i></Link>
                               </td>

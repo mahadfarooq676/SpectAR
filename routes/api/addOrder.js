@@ -20,7 +20,7 @@ router.post('/',[
 
     const { userId, productList, totalPrice, address, city, postalCode } = req.body;
 
-    var status = "Active";
+    var status = "Pending";
 
 
     var addedDate = new Date();
