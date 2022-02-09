@@ -39,6 +39,7 @@ const UpdateProduct = ({ auth: { admin }, setAlert, getCategories, updateProduct
       productImage: '',
       productGallery: '',
       product3dFile: '',
+      productMTLFile: '',
       status: ''
   });
    let addedBy = admin && admin.name;
@@ -99,15 +100,30 @@ useEffect(() => {
   const File3dUpload = (event) => {
     setInputField({ ...inputField, product3dFile: event.target.files[0]});
   }
+
+  const FileMTLUpload = (event) => {
+    setInputField({ ...inputField, productMTLFile: event.target.files[0]});
+  }
   
     const onSubmit = async e => {
         e.preventDefault();
+        if( !inputField.productName || !inputField.productPrice || !inputField.sku || !inputField.productCategory || !inputField.productQuantity|| !inputField.shortDescription || !inputField.detailedDescription || !inputField.materialType || !inputField.frameLength || !inputField.frameWeight || !inputField.lensWidth || !inputField.lensHeight || !inputField.templeLength || !inputField.bridgeWidth || !inputField.productGallery || !inputField.productImage || !inputField.product3dFile || !inputField.productMTLFile || !inputField.status ){
+          setAlert('All fiels are required','danger');
+      }else if(!inputField.brandName){
+        setInputField({ ...inputField, brandName: 'No Brand'})
+      }else if(inputField.salesPrice == 0){
+        setInputField({ ...inputField, salesPrice: inputField.productPrice })
+      }else if(!inputField.highlights){
+        setInputField({ ...inputField, highlights: 'No Highlights'})
+      }else{
+
         const formdata = new FormData();
         formdata.append('productImage', inputField.productImage, inputField.productImage.name);
         for (const key of Object.keys(inputField.productGallery)) {
           formdata.append('productGallery', inputField.productGallery[key])
       }
         formdata.append('product3dFile', inputField.product3dFile, inputField.product3dFile.name);
+        formdata.append('productMTLFile', inputField.productMTLFile, inputField.productMTLFile.name);
         formdata.append('productID', productId);
         formdata.append('productName', inputField.productName);
         formdata.append('brandName', inputField.brandName);
@@ -131,6 +147,7 @@ useEffect(() => {
         formdata.append('addedDate', addedDate);
 
         updateProduct(formdata, history);
+        
     };
 
 
@@ -231,14 +248,6 @@ useEffect(() => {
                       <option value="Deleted">Deleted</option>
                     </select>
                   </Form.Group>
-                   <Form.Group>
-                    <label htmlFor="productImage">Product Thumbnail</label>
-                    <Form.Control type="text" accept=".png, .jpg, .jpeg" name="productImage" className="form-control"  placeholder="Enter Product Thumbnail" value={productImage} />
-                  </Form.Group>
-                  {/* <Form.Group>
-                    <label htmlFor="productImage">Product Thumbnail</label>
-                    <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" placeholder="Enter Product Thumbnail" />
-                  </Form.Group> */}
                   <Form.Group>
                     <label htmlFor="productImage">Product Thumbnail</label>
                     <Form.Control type="file" accept=".png, .jpg, .jpeg" name="productImage" className="form-control" onChange={imageUpload} placeholder="Enter Product Thumbnail" />
@@ -251,6 +260,10 @@ useEffect(() => {
                     <label htmlFor="product3dFile">Product 3d File </label>
                     <Form.Control type="file" accept=".obj" name="product3dFile" className="form-control" onChange={File3dUpload} placeholder="Enter Product 3d File" />
                   </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="productMTLFile">Product MTL File </label>
+                    <Form.Control type="file" accept=".mtl" name="productMTLFile" className="form-control" onChange={FileMTLUpload} placeholder="Enter Product MTL File" />
+                  </Form.Group>
                   <input type="submit" className="btn btn-gradient-primary mr-2" name="submit" value="Update" />
                   <Link to="/ManageProduct" className="btn btn-light">Cancel</Link>
                 </form>
@@ -258,6 +271,7 @@ useEffect(() => {
             </div>
           </div>
           </Fragment>
+}
 }
 
 UpdateProduct.propTypes = {

@@ -7,7 +7,7 @@ import { login } from '../../actions/auth';
 import Alert from '../layout/Alert';
 
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated, history }) => {
 
     const [formData, setFormData] = useState({
         email:  '',
@@ -21,7 +21,7 @@ const Login = ({ login, isAuthenticated }) => {
 
     const onSubmit = async e => {
         e.preventDefault();
-        login(email,password);
+        login({email,password}, history);
         }
 
 // Redirect If Looged In

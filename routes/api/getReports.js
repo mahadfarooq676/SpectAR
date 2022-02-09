@@ -19,12 +19,21 @@ router.get('/', async (req, res) => {
     try{
         const order = await Order.find({ 
                 createdTimestamp:{
-                '$lte': "12/24/2021",
-                '$gte': "01/01/2022"
+                '$lte': createdTimestamp,
+                '$gte': lcreatedTimestamp
                 }
-        }, 'totalPrice')
-        console.log(oneWeekBefore)
-        res.json(order);
+        }, "totalPrice").select('-_id');
+
+        const len = order.length;
+        let TotalPrice = 0;
+        
+        for (let i = 0; i < len; i++) {
+            TotalPrice = parseInt(TotalPrice) + parseInt(order[i].totalPrice);
+        }
+
+        
+
+        res.json(TotalPrice);
     }catch(err){
        console.log(err.message);
        res.status(500).send('Server error');

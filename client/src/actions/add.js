@@ -27,17 +27,16 @@ export const addProduct = (formdata, history) => async dispatch => {
 }
 
 //Update Product
-export const updateProduct = ({ productId, productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity, shortDescription, highlights, detailedDescription, materialType, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate }, history) => async dispatch => {
+export const updateProduct = (formdata, history) => async dispatch => {
     const config = {
         headers: {
             'content-Type': 'application/json',
         }
     }
 
-    const body = JSON.stringify({ productId, productName, brandName, productPrice, salesPrice, sku, productCategory, productQuantity, shortDescription, highlights, detailedDescription, materialType, frameLength, frameWeight, lensWidth, lensHeight, templeLength, bridgeWidth, productImage, status, addedBy, addedDate });
 
     try{
-        const res = await axios.put(URL + 'api/updateProduct', body, config);
+        const res = await axios.put(URL + 'api/updateProduct', formdata, config);
 
         dispatch({
             type: UPDATE_PRODUCT,

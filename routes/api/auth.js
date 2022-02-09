@@ -39,7 +39,7 @@ router.post('/',[
     const isMatch = await bcrypt.compare(password, admin.password);
 
     if(admin.status != "Active"){
-        return res.status(400).json({ errors: [{ msg: 'Admin Not Exists' }] });
+        return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
     }else if(!isMatch){
         return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
     }

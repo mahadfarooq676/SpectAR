@@ -28,7 +28,7 @@ const App = () => {
                     <Route path='/Login' exact component={Login} />
                     <Route path='/' component={AppRoutes} />
                     <Route path='/notFound' component={NotFound} />
-                    <Redirect exact from="/" to="/Login" />
+                    <Redirect exact from="/" to="/Dashboard" />
                     <Redirect to="/notFound"/>
                   </Switch>
                 </Provider>

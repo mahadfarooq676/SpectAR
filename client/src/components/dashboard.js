@@ -32,7 +32,7 @@ import "react-datepicker/dist/react-datepicker.css";
             <div className="card bg-gradient-info card-img-holder text-white">
               <div className="card-body">
                 <img src={require("../assets/images/dashboard/circle.svg").default} className="card-img-absolute" alt="circle" />
-                <h4 className="font-weight-normal mb-3">Weekly Orders <i className="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                <h4 className="font-weight-normal mb-3">Monthly Sales <i className="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                 </h4>
                 <h2 className="mb-5">245</h2>
                 <h6 className="card-text">Decreased by 10%</h6>
@@ -43,7 +43,7 @@ import "react-datepicker/dist/react-datepicker.css";
             <div className="card bg-gradient-success card-img-holder text-white">
               <div className="card-body">
                 <img src={require("../assets/images/dashboard/circle.svg").default} className="card-img-absolute" alt="circle" />
-                <h4 className="font-weight-normal mb-3">Visitors Online <i className="mdi mdi-diamond mdi-24px float-right"></i>
+                <h4 className="font-weight-normal mb-3">Weekly Orders <i className="mdi mdi-diamond mdi-24px float-right"></i>
                 </h4>
                 <h2 className="mb-5">95,574</h2>
                 <h6 className="card-text">Increased by 5%</h6>

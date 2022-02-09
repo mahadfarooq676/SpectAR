@@ -35,7 +35,7 @@ export const register = ({name, email, password, role, addedBy, addedDate, statu
 
 
 // Login User
-export const login = (email, password) => async dispatch => {
+export const login = ({email, password}, history) => async dispatch => {
     const config = {
         headers: {
             'content-Type': 'application/json'
@@ -53,6 +53,7 @@ export const login = (email, password) => async dispatch => {
         });
 
         dispatch( loadUser() );
+        history.push('/Dashboard');
     } catch (err) {
         const errors = err.response.data.errors;
         if(errors){

@@ -20,21 +20,22 @@ router.post('/',[
 
     const { userId, productList, totalPrice, address, city, postalCode } = req.body;
 
-    var status = "Pending";
+    var status = "Active";
 
 
     var addedDate = new Date();
     var dd = String(addedDate.getDate()).padStart(2, '0');
     var mm = String(addedDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = addedDate.getFullYear();
-    let hours = addedDate.getHours();
-    let minutes = addedDate.getMinutes();
-    let seconds = addedDate.getSeconds();
 
-    var createdTimestamp = mm + '/' + dd + '/' + yyyy + ' - ' + hours + ':' + minutes + ':' + seconds;
+    var createdTimestamp = mm + '/' + dd + '/' + yyyy;
 
+    // const iid = productList.map((o) => o[0][0].productId);
+    // console.log("iid = "+iid)
 
-
+    // for (let i = 0; i < iid.length; i++) {
+    //     productDetails[i] = await Product.findById(iid[i]);
+    // }
     
     try{
         

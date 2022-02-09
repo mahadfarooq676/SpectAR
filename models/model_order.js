@@ -13,6 +13,9 @@ const order = new mongoose.Schema({
     status: {
         type: String,
         required: true
+    },totalPrice: {
+        type: String,
+        required: true
     },
     createdTimestamp: {
         type: String ,

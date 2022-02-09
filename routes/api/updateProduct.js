@@ -21,22 +21,7 @@ var upload = multer({
 // @route POST api/product
 // @desc Add Product 
 // @access Public
-router.put('/',upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }]),
-[
-    check('productId', 'Product Id is required').not().isEmpty(),
-    check('productName', 'Product Name is required').not().isEmpty(),
-    check('productPrice', 'Product Price is required').not().isEmpty(),
-    check('productCategory', 'Product Category is required').not().isEmpty(),
-    check('productQuantity', 'Product Quantity is required').not().isEmpty(),
-    check('frameLength', 'Frame Length is required').not().isEmpty(),
-    check('frameWeight', 'Frame Weight is required').not().isEmpty(),
-    check('lensWidth', 'Lens Width is required').not().isEmpty(),
-    check('lensHeight', 'Lens Height Code is required').not().isEmpty(),
-    check('templeLength', 'Temple Length is required').not().isEmpty(),
-    check('bridgeWidth', 'Bridge Width is required').not().isEmpty(),
-    check('productImage', 'Product Image is required').not().isEmpty(),
-    check('status', 'Status is required').not().isEmpty(),
-],async (req,res) => {
+router.put('/',upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'product3dFile', maxCount: 1 }, { name: 'productGallery', maxCount: 10 }, { name: 'productMTLFile', maxCount: 1 }]),async (req,res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array() })
@@ -44,6 +29,7 @@ router.put('/',upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'pr
 
     const productImage = req.files.productImage[0].filename;
     const product3dFile = req.files.product3dFile[0].filename;
+    const productMTLFile = req.files.productMTLFile[0].filename;
     const reqFiles = [];
     for (var i = 0; i < req.files.productGallery.length; i++) {
         reqFiles.push(req.files.productGallery[i].filename)
@@ -52,7 +38,7 @@ router.put('/',upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'pr
     
     try{
 
-        const product = new Product({
+        var updateProduct = new Product({
             productName: req.body.productName,
             brandName: req.body.brandName,
             productPrice: req.body.productPrice,
@@ -73,13 +59,14 @@ router.put('/',upload.fields([{ name: 'productImage', maxCount: 1 }, { name: 'pr
             productImage: productImage,
             productGallery: reqFiles,
             product3dFile: product3dFile,
+            productMTLFile: productMTLFile,
             status: req.body.status,
             addedBy: req.body.addedBy, 
             addedDate: req.body.addedDate,
         });
         
 
-        await Product.findByIdAndUpdate( productId, { $set: updateProduct } );
+        await Product.findByIdAndUpdate( productId, { $set: updateProductzz } );
         return res.status(200).json([{ msg: 'Product Updated successfully' }] );
     
     }catch(err){
