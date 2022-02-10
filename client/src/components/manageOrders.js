@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOrders } from '../actions/getData';
 import Spinner from './layout/spinner';
+import { Modal,  } from 'react-bootstrap';
 import { deleteAdmin } from '../actions/delete';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -20,20 +21,6 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
         setFlag(true);
     }, []);
 
-    const changeStatus = async (_id) => {
-      confirmAlert({
-        title: 'Confirm to change status',
-        message: 'Are you sure to do this.',
-        buttons: [
-          {
-            label: 'Yes',
-          },
-          {
-            label: 'No'
-          }
-        ]
-      });
-    }
     const date = new Date();
     const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
@@ -94,7 +81,7 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                               <tr key={okey}>
                               <td>{order._id.substr(18,24)}</td>
                               <td>{order.createdTimestamp}</td>
-                              <td><label className="badge badge-gradient-primary" style={{ width:"100px" }}>{order.status}</label></td>
+                              {/* <td><label className="badge badge-gradient-primary" style={{ width:"100px" }}>{order.status}</label></td> */}
                               {/* <td>
                                 <form>
                                   <select className="form-control badge-dark badge" name="orderStatus" onChange={e => onChange(e)} value={orderStatus}>
@@ -105,8 +92,8 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                                   </select>
                                 </form>
                               </td> */}
-                              <td>
-                              <form>
+                              {/* <td>
+                                <form>
                                   <select className="badge badge-gradient-primary" name="orderStatus" value={orderStatus} onChange={e => onChange(e)}>
                                     <option value="Pending" className="bg-dark">Pending</option>
                                     <option value="InProgress" className="bg-secondary">InProgress</option>
@@ -114,7 +101,10 @@ const ManageOrders = ({ getOrders, getData: { orders, loading }, history }) => {
                                     <option value="Rejected" className="bg-danger">Rejected</option>
                                   </select>
                                 </form>
-                                </td>
+                              </td> */}
+                              <td>
+                                <Link className="btn btn-sm btn-gradient-primary mr-2" style={{ width:"100px" }} >{order.status}</Link>
+                              </td>
                               <td>
                                 <Link className="btn btn-sm btn-gradient-success mr-2" onClick={() => viewOrder(order._id)} ><i className="mdi mdi-eye"></i></Link>
                               </td>
